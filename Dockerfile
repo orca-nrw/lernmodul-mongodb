@@ -10,7 +10,8 @@ ENV HOME /home/${NB_USER}
 RUN apt-get update -y && apt-get install -y python3-pip python-dev
 RUN pip3 install --no-cache --upgrade pip && \
     pip3 install --no-cache notebook matplotlib && \
-    pip3 install pymongo
+    pip3 install pymongo && \
+    pip3 install jupyter-notebookparams
 
 RUN apt-get -y install gnupg
 RUN apt-get -y install wget
