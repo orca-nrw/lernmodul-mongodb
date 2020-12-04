@@ -41,9 +41,9 @@ COPY index.ipynb /home/${NB_USER}
 RUN chmod 777 /home/${NB_USER}/index.ipynb
 
 COPY Stammdaten.json /home/${NB_USER}
-COPY mongod.conf /etc/
+COPY mongod.conf /home/${NB_USER}
 RUN touch ${HOME}/mongod.log
 RUN chmod 777 ${HOME}/mongod.log
 
 EXPOSE 27017
-CMD ["mongod --config /etc/mongod.conf"]
+CMD ["mongod --config /home/jovyan/mongod.conf"]
