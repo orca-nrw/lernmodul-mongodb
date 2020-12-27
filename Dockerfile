@@ -41,7 +41,8 @@ COPY README.md /home/${NB_USER}
 COPY index.ipynb /home/${NB_USER}
 RUN chmod 777 /home/${NB_USER}/index.ipynb
 
-COPY Hotel.json /home/${NB_USER}
+COPY data /home/${NB_USER}
+COPY img /home/${NB_USER}
 COPY mongod.conf /home/${NB_USER}
 RUN touch ${HOME}/mongod.log
 RUN chmod 777 ${HOME}/mongod.log
