@@ -1,0 +1,5 @@
+{
+  "load_extensions": {
+    "submit-jupyter-data/main": true
+  }
+}
