@@ -10,7 +10,7 @@ ENV HOME /home/${NB_USER}
 # Install Python dependencies
 RUN apt-get update -y && apt-get install -y python3-pip python-dev
 RUN pip3 install --no-cache --upgrade pip && \
-    pip3 install --no-cache notebook matplotlib && \
+    pip3 install --no-cache notebook matplotlib pyspark ipywidgets && \
     pip3 install --no-cache pandas && \
     pip3 install --no-cache pymongo && \
     pip3 install --no-cache jupyter-notebookparams
@@ -21,6 +21,7 @@ RUN apt-get -y install gnupg && \
     wget -qO - https://www.mongodb.org/static/pgp/server-4.0.asc | apt-key add - && \
     echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list && \
     apt-get -y update
+
 RUN DEBIAN_FRONTEND=noninteractive \
     TZ=Asia/Singapore \
     apt-get install -y mongodb-org=4.0.16 mongodb-org-server=4.0.16 mongodb-org-shell=4.0.16 mongodb-org-mongos=4.0.16 mongodb-org-tools=4.0.16
