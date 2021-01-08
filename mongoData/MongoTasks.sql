@@ -132,6 +132,13 @@ CREATE TABLE IF NOT EXISTS "CountCity" (
 INSERT INTO "TaskReview" VALUES (106,'DFP','','SELECT * FROM CountCity;','Irgendeine Lösung');
 INSERT INTO "CountCity" VALUES ('Stockholm','3');
 
+DROP TABLE IF EXISTS "MoreThan25";
+CREATE TABLE IF NOT EXISTS "MoreThan25" (
+	"_id" TEXT NOT NULL UNIQUE,
+	"count" TEXT NOT NULL
+);
+INSERT INTO "TaskReview" VALUES (107,'DFP','','SELECT * FROM MoreThan25;','Irgendeine Lösung');
+INSERT INTO "MoreThan25" VALUES ('None','41');
 
 
 
