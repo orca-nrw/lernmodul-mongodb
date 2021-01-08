@@ -11,13 +11,33 @@ INSERT INTO "TaskReview" VALUES (1,'SC','Schau nochmal unter Punkt 2.1 nach.','O
 INSERT INTO "TaskReview" VALUES (2,'SC','TIPP','In Dokumenten mit Key/Value Paaren','In einer Textdatei,In einer Tabelle mit Spalten und Zeilen,In Dokumenten mit Key/Value Paaren');
 INSERT INTO "TaskReview" VALUES (3,'SC','TIPP','BSON','JSON,BSON,CSV,XML,DType');
 INSERT INTO "TaskReview" VALUES (4,'SC','Embedded Document sind Dokumente welche als Objekt innerhalb eines anderen Dokumentes abgespeichert werden','{"info":{"price":"123"}}','{"info":{"price":"123"}},{"info":["price":"123"]},{"info":"123"');
-INSERT INTO "TaskReview" VALUES (5,'SC','Siehe nochmal beim Filtern von Daten nach.','Der Cursor ist ein Pointer und zeigt nur einmal auf die Daten','Der Cursor zeigt bei jeder Ausführung die angeforderten Daten an,Der Cursor ist ein Pointer und zeigt nur einmal auf die Daten');
-INSERT INTO "TaskReview" VALUES (6,'SC','Siehe nochmal beim Anlegen eines neuen Dokumentes nach.','Die ObjectId wird automatisch von der MongoDB generiert, sofern kein eigener Primärschlüssel definiert wird','Die MongoDB Identifiziert anhand aller Key/Value Paare im Dokument,Die ObjectId wird automatisch von der MongoDB generiert, sofern kein eigener Primärschlüssel definiert wird, Weil die MongoDB keine Primärschlüssel besitzt und Dokumente redundant vorkommen können');
+INSERT INTO "TaskReview" VALUES (5,'SC','Siehe nochmal beim Filtern von Daten nach.','Der Cursor ist ein Pointer und zeigt nur einmal auf die Daten -> Der Cursor muss erneut auf die Daten zeigen','Der Cursor zeigt bei jeder Ausführung die angeforderten Daten an,Der Cursor ist ein Pointer und zeigt nur einmal auf die Daten -> Der Cursor muss erneut auf die Daten zeigen');
+INSERT INTO "TaskReview" VALUES (6,'SC','Siehe nochmal beim Anlegen eines neuen Dokumentes nach.','Die ObjectId wird automatisch von der MongoDB generiert','Sofern kein eigener Primärschlüssel definiert wird muss die ObjectId immer angegeben werden, Die MongoDB Identifiziert anhand aller Key/Value Paare im Dokument,Die ObjectId wird automatisch von der MongoDB generiert, sofern kein eigener Primärschlüssel definiert wird, Weil die MongoDB keine Primärschlüssel besitzt und Dokumente redundant vorkommen können');
 INSERT INTO "TaskReview" VALUES (7,'SC','','Die MongoDB ist ein strukturlose Datenbank und kann somit in einer Collection unterschiedliche Dokumente enthalten','In der Collection "customer" wurde noch keine Strukur implementiert, Die MongoDB löscht eingefügte Dokumente die nicht der Struktur entsprechen ,Die MongoDB ist ein strukturlose Datenbank und kann somit in einer Collection unterschiedliche Dokumente enthalten');
 INSERT INTO "TaskReview" VALUES (8,'SC','','Die BSON Datentypen werden als Objekte gespeichert','Die BSON Datentypen werden als Objekte gespeichert,Es wird alles korrekt angezeigt, Einen Fehler beim Export der Daten');
 INSERT INTO "TaskReview" VALUES (9,'SC','','Ja aber es umständlicher und die Daten können nicht live betrachtet werden','Nein denn die MongoDB kann keine Daten als CSV speichern ,Ja aber es umständlicher und die Daten können nicht live betrachtet werden');
-INSERT INTO "TaskReview" VALUES (10,'SC','','1001','463,1001,5476,8469');
+INSERT INTO "TaskReview" VALUES (10,'SC','','1000','463,1000,5476,8469');
 INSERT INTO "TaskReview" VALUES (11,'SC','','1000','476,1000,5476,1');
+
+DROP TABLE IF EXISTS "User";
+CREATE TABLE IF NOT EXISTS "User" (
+	"_id" TEXT NOT NULL UNIQUE,
+	"first_name" TEXT NOT NULL,
+	"last_name"	TEXT NOT NULL,
+	"email"	TEXT NOT NULL,
+	"phone_number"	TEXT NOT NULL,
+	"last_login"	TEXT NOT NULL,
+	"registration_date" TEXT
+);
+INSERT INTO "TaskReview" VALUES (100,'DFP','TIPP','SELECT * FROM User WHERE _id=''775'';','Irgendeine Lösung');
+INSERT INTO "User" VALUES (
+'775',
+'Manuel',
+'Mustermann',
+'Manuel@Mustermann.de',
+'+49 125 145 1258',
+'2019-12-04',
+'2010-10-09');
 
 DROP TABLE IF EXISTS "BrynLegat";
 CREATE TABLE IF NOT EXISTS "BrynLegat" (
@@ -26,34 +46,34 @@ CREATE TABLE IF NOT EXISTS "BrynLegat" (
 	"price"	TEXT,
 	"in_stock"	TEXT NOT NULL,
 	"sold"	TEXT NOT NULL,
-	"stock" TEXT NOT NULL
+	"stock" TEXT
 );
 INSERT INTO "TaskReview" VALUES (101,'DFP','TIPP','SELECT * FROM BrynLegat;','Irgendeine Lösung');
 INSERT INTO "BrynLegat" VALUES (
 '5fe6fc8ba789e6e217ef8764',
 'Bread - Triangle White',
-'6,82',
+'€6.82',
 'True',
 '12',
 '1.0');
 INSERT INTO "BrynLegat" VALUES (
 '5fe6fc8ba789e6e217ef8920',
 'Mountain Dew',
-'16,25',
+'€16.25',
 'True',
 '47',
 '11.0');
 INSERT INTO "BrynLegat" VALUES (
 '5fe6fc8ba789e6e217ef8a85',
 'Onions - Spanish',
-'9,42',
+'€9.42',
 'False',
 '28',
 'nan');
 INSERT INTO "BrynLegat" VALUES (
 '5fe6fc8ba789e6e217ef8ae0',
 'Hand Towel',
-'5,46',
+'€5.46',
 'False',
 '42',
 'nan');
@@ -68,9 +88,9 @@ CREATE TABLE IF NOT EXISTS "StockExists" (
 	"stock" TEXT NOT NULL
 );
 INSERT INTO "TaskReview" VALUES (102,'DFP','Sie können dafür den $exists Operator verwenden','SELECT * FROM StockExists;','Irgendeine Lösung');
-INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef870c','Energy Drink','10,52','True','75','25');
-INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef870f','Pastry - Plain Baked Croissant','4,39','True','95','76');
-INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef8710','Scallops - U - 10','18,70','True','72','46');
+INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef870f','Pastry - Plain Baked Croissant','€4.39','True','95','76');
+INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef8710','Scallops - U - 10','€18.70','True','72','46');
+INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef8712','Beer - Camerons Cream Ale','€20.19','True','25','60');
 
 DROP TABLE IF EXISTS "VorratProdukt";
 CREATE TABLE IF NOT EXISTS "VorratProdukt" (
@@ -82,6 +102,42 @@ CREATE TABLE IF NOT EXISTS "VorratProdukt" (
 	"stock" TEXT NOT NULL
 );
 INSERT INTO "TaskReview" VALUES (103,'DFP','Sie benötigen hierführ $and, $gte/gt, $lte/lt. Der $and Operator erhällt einen Array als input.','SELECT * FROM VorratProdukt;','Irgendeine Lösung');
-INSERT INTO "VorratProdukt" VALUES ('5fe6fc8ba789e6e217ef899a','Wine - White Cab Sauv.on','18,17','True','94','2');
+INSERT INTO "VorratProdukt" VALUES ('5fe6fc8ba789e6e217ef899a','Wine - White Cab Sauv.on','€18.17','True','94','2');
+
+DROP TABLE IF EXISTS "DoubleProduct";
+CREATE TABLE IF NOT EXISTS "DoubleProduct" (
+	"_id" TEXT NOT NULL UNIQUE,
+	"product" TEXT NOT NULL,
+	"price"	TEXT,
+	"in_stock"	TEXT NOT NULL,
+	"sold"	TEXT NOT NULL
+);
+INSERT INTO "TaskReview" VALUES (104,'DFP','','SELECT * FROM DoubleProduct;','Irgendeine Lösung');
+INSERT INTO "DoubleProduct" VALUES ('5fe6fc8ba789e6e217ef87ee','Cocoa Powder - Natural','€20.22','False','56');
+
+DROP TABLE IF EXISTS "CountGains";
+CREATE TABLE IF NOT EXISTS "CountGains" (
+	"_id" TEXT NOT NULL UNIQUE,
+	"count" TEXT NOT NULL
+);
+INSERT INTO "TaskReview" VALUES (105,'DFP','','SELECT * FROM CountGains;','Irgendeine Lösung');
+INSERT INTO "CountGains" VALUES ('None','550812.16');
+
+
+DROP TABLE IF EXISTS "CountCity";
+CREATE TABLE IF NOT EXISTS "CountCity" (
+	"_id" TEXT NOT NULL UNIQUE,
+	"count" TEXT NOT NULL
+);
+INSERT INTO "TaskReview" VALUES (106,'DFP','','SELECT * FROM CountCity;','Irgendeine Lösung');
+INSERT INTO "CountCity" VALUES ('Stockholm','3');
+
+
+
+
+
+
+
+
 
 COMMIT;
