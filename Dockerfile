@@ -18,13 +18,13 @@ RUN pip3 install --no-cache --upgrade pip && \
 # Intsall MongoDB
 RUN apt-get -y install gnupg && \
     apt-get -y install wget && \
-    wget -qO - https://www.mongodb.org/static/pgp/server-4.0.asc | apt-key add - && \
-    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list && \
+    wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add - && \
+    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list && \
     apt-get -y update
 
 RUN DEBIAN_FRONTEND=noninteractive \
     TZ=Asia/Singapore \
-    apt-get install -y mongodb-org=4.0.16 mongodb-org-server=4.0.16 mongodb-org-shell=4.0.16 mongodb-org-mongos=4.0.16 mongodb-org-tools=4.0.16
+    apt-get install -y mongodb-org=4.4.2 mongodb-org-server=4.4.2 mongodb-org-shell=4.4.2 mongodb-org-mongos=4.4.2 mongodb-org-tools=4.4.2
 
 RUN adduser --disabled-password \
     --gecos "Default user" \
