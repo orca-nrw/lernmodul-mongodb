@@ -10,10 +10,11 @@ ENV HOME /home/${NB_USER}
 # Install Python dependencies
 RUN apt-get update -y && apt-get install -y python3-pip python-dev
 RUN pip3 install --no-cache --upgrade pip && \
-    pip3 install --no-cache notebook matplotlib pyspark ipywidgets && \
+    pip3 install --no-cache notebook matplotlib ipywidgets && \
     pip3 install --no-cache pandas && \
     pip3 install --no-cache pymongo && \
-    pip3 install --no-cache jupyter-notebookparams
+    pip3 install -i https://test.pypi.org/simple/ jupyternb-lti-connector==0.0.4 && \
+    pip3 install -i https://test.pypi.org/simple/ jupyternb-task-review
 
 # Intsall MongoDB
 RUN apt-get -y install gnupg && \
