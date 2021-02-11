@@ -13,8 +13,9 @@ RUN pip3 install --no-cache --upgrade pip && \
     pip3 install --no-cache notebook matplotlib ipywidgets && \
     pip3 install --no-cache pandas && \
     pip3 install --no-cache pymongo && \
-    pip3 install -i https://test.pypi.org/simple/ jupyternb-lti-connector==0.0.4 && \
-    pip3 install -i https://test.pypi.org/simple/ jupyternb-task-review
+    pip3 install -i https://test.pypi.org/simple/ jupyternb-task-review && \
+    pip3 install -i https://test.pypi.org/simple/ jupyternb-lti-connector
+
 
 # Intsall MongoDB
 RUN apt-get -y install gnupg && \
@@ -46,9 +47,10 @@ RUN chown -R mongodb:mongodb ${HOME}/data && \
 
 # copy the notebook data and change permission
 COPY . ${HOME}
+RUN chmod 777 ${HOME}/entrypoint.sh
 RUN chmod 777 /home/${NB_USER}/index.ipynb && \
     touch ${HOME}/mongod.log && chmod 777 ${HOME}/mongod.log
 
 EXPOSE 27017
-CMD ["mongod --config /home/jovyan/mongod.conf"]
-#CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+
+entrypoint ${HOME}/entrypoint.sh
