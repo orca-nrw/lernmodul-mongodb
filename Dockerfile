@@ -53,4 +53,4 @@ RUN chmod 777 /home/${NB_USER}/index.ipynb && \
 
 EXPOSE 27017
 
-entrypoint ${HOME}/entrypoint.sh
+#entrypoint ${HOME}/entrypoint.sh
