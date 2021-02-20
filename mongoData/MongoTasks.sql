@@ -7,17 +7,64 @@ CREATE TABLE IF NOT EXISTS "TaskReview" (
 	"solutionForReview"	TEXT NOT NULL,
 	"additionalInformation"	TEXT NOT NULL
 );
-INSERT INTO "TaskReview" VALUES (1,'SC','Schau nochmal unter Punkt 2.1 nach.','ObjectId','Number,Int,Varchar,String,ObjectId,ID');
-INSERT INTO "TaskReview" VALUES (2,'SC','TIPP','In Dokumenten mit Key/Value Paaren','In einer Textdatei,In einer Tabelle mit Spalten und Zeilen,In Dokumenten mit Key/Value Paaren');
-INSERT INTO "TaskReview" VALUES (3,'SC','TIPP','BSON','JSON,BSON,CSV,XML,DType');
-INSERT INTO "TaskReview" VALUES (4,'SC','Embedded Document sind Dokumente welche als Objekt innerhalb eines anderen Dokumentes abgespeichert werden','{"info":{"price":"123"}}','{"info":{"price":"123"}},{"info":["price":"123"]},{"info":"123"');
-INSERT INTO "TaskReview" VALUES (5,'SC','Siehe nochmal beim Filtern von Daten nach.','Der Cursor ist ein Pointer und zeigt nur einmal auf die Daten -> Der Cursor muss erneut auf die Daten zeigen','Der Cursor zeigt bei jeder Ausführung die angeforderten Daten an,Der Cursor ist ein Pointer und zeigt nur einmal auf die Daten -> Der Cursor muss erneut auf die Daten zeigen');
-INSERT INTO "TaskReview" VALUES (6,'SC','Siehe nochmal beim Anlegen eines neuen Dokumentes nach.','Die ObjectId wird automatisch von der MongoDB generiert','Sofern kein eigener Primärschlüssel definiert wird muss die ObjectId immer angegeben werden, Die MongoDB Identifiziert anhand aller Key/Value Paare im Dokument,Die ObjectId wird automatisch von der MongoDB generiert, sofern kein eigener Primärschlüssel definiert wird, Weil die MongoDB keine Primärschlüssel besitzt und Dokumente redundant vorkommen können');
-INSERT INTO "TaskReview" VALUES (7,'SC','','Die MongoDB ist ein strukturlose Datenbank und kann somit in einer Collection unterschiedliche Dokumente enthalten','In der Collection "customer" wurde noch keine Strukur implementiert, Die MongoDB löscht eingefügte Dokumente die nicht der Struktur entsprechen ,Die MongoDB ist ein strukturlose Datenbank und kann somit in einer Collection unterschiedliche Dokumente enthalten');
-INSERT INTO "TaskReview" VALUES (8,'SC','','Die BSON Datentypen werden als Objekte gespeichert','Die BSON Datentypen werden als Objekte gespeichert,Es wird alles korrekt angezeigt, Einen Fehler beim Export der Daten');
-INSERT INTO "TaskReview" VALUES (9,'SC','','Ja aber es umständlicher und die Daten können nicht live betrachtet werden','Nein denn die MongoDB kann keine Daten als CSV speichern ,Ja aber es umständlicher und die Daten können nicht live betrachtet werden');
-INSERT INTO "TaskReview" VALUES (10,'SC','','1000','463,1000,5476,8469');
-INSERT INTO "TaskReview" VALUES (11,'SC','','1000','476,1000,5476,1');
+INSERT INTO "TaskReview" VALUES (21,'SC','Schau nochmal unter Punkt 2.1 nach.','5',json('{"1": "Number", "2": "Int", "3":  "Varchar", "4":  "String", "5":  "ObjectId", "6":  "ID"}'));
+INSERT INTO "TaskReview" VALUES (22,'SC','TIPP','2',json('{"1": "In einer Textdatei,In einer Tabelle mit Spalten und Zeilen", "2": "In Dokumenten mit Key/Value Paaren"}'));
+INSERT INTO "TaskReview" VALUES (23,'SC','TIPP','2',json('{"1": "JSON", "2": "BSON", "3":  "CSV", "4":  "XML", "5":  "DType"}'));
+INSERT INTO "TaskReview" VALUES (24,'SC','Embedded Document sind Dokumente welche als Objekt innerhalb eines anderen Dokumentes abgespeichert werden','1',
+                                 json('{"1": "{info:{price:123}}", "2": "{info:[price:123]}", "3": "{info:123}"}'));
+
+INSERT INTO "TaskReview" VALUES (31,'SC','Siehe nochmal beim Anlegen eines neuen Dokumentes nach.','3',
+                                json('{"1": "Sofern kein eigener Primärschlüssel definiert wird muss die ObjectId immer angegeben werden",' ||
+                                     ' "2": "Die MongoDB Identifiziert anhand aller Key/Value Paare im Dokument",' ||
+                                     ' "3": "Die ObjectId wird automatisch von der MongoDB generiert",' ||
+                                     ' "4": "Sofern kein eigener Primärschlüssel definiert wird",' ||
+                                     ' "5": "Weil die MongoDB keine Primärschlüssel besitzt und Dokumente redundant vorkommen können"}'));
+INSERT INTO "TaskReview" VALUES (32,'SC','Siehe nochmal beim Filtern von Daten nach.',
+                                 '2',
+                                 json('{"1": "Der Cursor zeigt bei jeder Ausführung die angeforderten Daten an", "2": "Der Cursor ist ein Pointer und zeigt nur einmal auf die Daten -> Der Cursor muss erneut auf die Daten zeigen"}'));
+INSERT INTO "TaskReview" VALUES (33,'SC','','3',
+                                json('{"1": "In der Collection customer wurde noch keine Struktur implementiert",' ||
+                                     ' "2": "Die MongoDB löscht eingefügte Dokumente die nicht der Struktur entsprechen",' ||
+                                     ' "3": "Die MongoDB ist ein strukturlose Datenbank und kann somit in einer Collection unterschiedliche Dokumente enthalten"}'));
+
+INSERT INTO "TaskReview" VALUES (41,'SC','','1',
+                                json('{"1": "Die BSON Datentypen werden als Objekte gespeichert",' ||
+                                     ' "2": "Es wird alles korrekt angezeigt",' ||
+                                     ' "3": "Einen Fehler beim Export der Daten"}'));
+
+INSERT INTO "TaskReview" VALUES (42,'SC','','2',
+                                json('{"1": "Nein denn die MongoDB kann keine Daten als CSV speichern",' ||
+                                     ' "2": "Ja aber es umständlicher und die Daten können nicht live betrachtet werden"}'));
+
+INSERT INTO "TaskReview" VALUES (43,'SC','','2',
+                                  json('{"1": "463",' ||
+                                       ' "2": "1000",' ||
+                                       ' "3": "5476",' ||
+                                       ' "4": "8469"}'));
+
+INSERT INTO "TaskReview" VALUES (44,'SC','','2',
+                                        json('{"1": "476",' ||
+                                       ' "2": "1000",' ||
+                                       ' "3": "5476",' ||
+                                       ' "4": "1"}' ));
+
+INSERT INTO "TaskReview" VALUES (51,'MC','',json_array('1', '3','5','6'),
+                                        json('{"1": "$eq",' ||
+                                       ' "2": "or",' ||
+                                       ' "3": "$or",' ||
+                                       ' "4": "%or",' ||
+                                       ' "5": "$and",' ||
+                                       ' "6": "$set",' ||
+                                       ' "7": "set",' ||
+                                       ' "8": "equals"}' ));
+
+INSERT INTO "TaskReview" VALUES (71,'SC','Die Anwtort steht oben im Einleitungstext für das Map-Reduce Verfahren.','5',json('{"1": "Number", "2": "Int", "3":  "Varchar", "4":  "String", "5":  "ObjectId", "6":  "ID"}'));
+INSERT INTO "TaskReview" VALUES (72,'SC','Die Anwtort steht oben im Einleitungstext für das Map-Reduce Verfahren.','5',json('{"1": "Number", "2": "Int", "3":  "Varchar", "4":  "String", "5":  "ObjectId", "6":  "ID"}'));
+INSERT INTO "TaskReview" VALUES (73,'MC','Die Anwtort steht oben im Einleitungstext für das Map-Reduce Verfahren.',json_array('1', '2'),
+                                 json('{"1": "Map Reduce hat eine geringere Performance",' ||
+                                      ' "2": "Die Usability der Aggregation Pipeline ist besser",' ||
+                                      ' "3": "Das Map-Recue Verfahren kann durch die verwendung von JavaScript umfangreichere Queries erstellen"}'));
+
 
 DROP TABLE IF EXISTS "User";
 CREATE TABLE IF NOT EXISTS "User" (
@@ -29,7 +76,7 @@ CREATE TABLE IF NOT EXISTS "User" (
 	"last_login"	TEXT NOT NULL,
 	"registration_date" TEXT
 );
-INSERT INTO "TaskReview" VALUES (100,'DFP','TIPP','SELECT * FROM User WHERE _id=''775'';','Irgendeine Lösung');
+INSERT INTO "TaskReview" VALUES (301,'DFP','TIPP','SELECT * FROM User WHERE _id=''775'';','Irgendeine Lösung');
 INSERT INTO "User" VALUES (
 '775',
 'Manuel',
@@ -48,7 +95,21 @@ CREATE TABLE IF NOT EXISTS "BrynLegat" (
 	"sold"	TEXT NOT NULL,
 	"stock" TEXT
 );
-INSERT INTO "TaskReview" VALUES (101,'DFP','TIPP','SELECT * FROM BrynLegat;','Irgendeine Lösung');
+INSERT INTO "TaskReview" VALUES (501,'DFP','Sieh im Kapitel Datenbestand nochmal nach wo die Produkt-Ids abgelegt sind und worauf diese verweisen.','SELECT * FROM BrynLegat;',
+                                 'customer_col = store_db["Customer"]
+                                 result = customer_col.find({"first_name" : "Bryn" })
+
+list_of_products = []
+for doc in result:
+    list_of_products = doc["cart"].copy()
+
+grocery_col = store_db["Grocery"]
+cursor = grocery_col.find({"_id":{"$in":list_of_products}})
+
+df = pd.DataFrame(cursor)
+df = df.astype(str)
+mongo_lm.show_task(501,df)')
+                                 ;
 INSERT INTO "BrynLegat" VALUES (
 '5fe6fc8ba789e6e217ef8764',
 'Bread - Triangle White',
@@ -87,7 +148,13 @@ CREATE TABLE IF NOT EXISTS "StockExists" (
 	"sold"	TEXT NOT NULL,
 	"stock" TEXT NOT NULL
 );
-INSERT INTO "TaskReview" VALUES (102,'DFP','Sie können dafür den $exists Operator verwenden','SELECT * FROM StockExists;','Irgendeine Lösung');
+INSERT INTO "TaskReview" VALUES (502,'DFP','Sie können dafür den $exists Operator verwenden','SELECT * FROM StockExists;',
+                                 'customer_col = store_db["Grocery"]
+result = customer_col.find({"stock":{"$exists":1}}).limit(3)
+df = pd.DataFrame(result)
+df = df.astype(str)
+mongo_lm.show_task(502,df)');
+
 INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef870f','Pastry - Plain Baked Croissant','€4.39','True','95','76');
 INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef8710','Scallops - U - 10','€18.70','True','72','46');
 INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef8712','Beer - Camerons Cream Ale','€20.19','True','25','60');
@@ -101,7 +168,15 @@ CREATE TABLE IF NOT EXISTS "VorratProdukt" (
 	"sold"	TEXT NOT NULL,
 	"stock" TEXT NOT NULL
 );
-INSERT INTO "TaskReview" VALUES (103,'DFP','Sie benötigen hierführ $and, $gte/gt, $lte/lt. Der $and Operator erhällt einen Array als input.','SELECT * FROM VorratProdukt;','Irgendeine Lösung');
+INSERT INTO "TaskReview" VALUES (503,'DFP','Sie benötigen hierführ $and, $gte/gt, $lte/lt. Der $and Operator erhällt einen Array als input.','SELECT * FROM VorratProdukt;',
+                                 'customer_col = store_db["Grocery"]
+result = grocery_col.find({"$and": [{"sold":{"$gte":90}},{"in_stock":True},{"stock":{"$lte":5}}]})
+df = pd.DataFrame(result)
+df
+df = df.astype(str)
+mongo_lm.show_task(503,df)');
+
+
 INSERT INTO "VorratProdukt" VALUES ('5fe6fc8ba789e6e217ef899a','Wine - White Cab Sauv.on','€18.17','True','94','2');
 
 DROP TABLE IF EXISTS "DoubleProduct";
@@ -112,7 +187,10 @@ CREATE TABLE IF NOT EXISTS "DoubleProduct" (
 	"in_stock"	TEXT NOT NULL,
 	"sold"	TEXT NOT NULL
 );
-INSERT INTO "TaskReview" VALUES (104,'DFP','','SELECT * FROM DoubleProduct;','Irgendeine Lösung');
+INSERT INTO "TaskReview" VALUES (601,'DFP','Dabei kann der $gt Operator in Kombination mit der Match Pipeline verwendet werden.','SELECT * FROM DoubleProduct;','pipeline = [
+    {"$match" : {"product":"Cocoa Powder - Natural"}},
+    {"$match" : {"sold": {"$gt" : 50}}}
+]');
 INSERT INTO "DoubleProduct" VALUES ('5fe6fc8ba789e6e217ef87ee','Cocoa Powder - Natural','€20.22','False','56');
 
 DROP TABLE IF EXISTS "CountGains";
@@ -120,7 +198,12 @@ CREATE TABLE IF NOT EXISTS "CountGains" (
 	"_id" TEXT NOT NULL UNIQUE,
 	"count" TEXT NOT NULL
 );
-INSERT INTO "TaskReview" VALUES (105,'DFP','','SELECT * FROM CountGains;','Irgendeine Lösung');
+INSERT INTO "TaskReview" VALUES (603,'DFP','Eine Stage für die Gruppierung kann mit einem $sum Operator kombiniert werden. Dadurch kann "$multiply": [ "$price", "$sold" ] implementiert werden. Der $out Operator speichert die Ergebnisse in einer neuen Collection ab. Verwenden Sie diesen als letztes in der Pipeline. ','SELECT * FROM CountGains;','pipeline = [
+    {"$addFields": {"price" : {"$trim": {"input": "$price", "chars": "€"}}}},
+    {"$addFields": {"price" : {"$convert": {"input": "$price", "to": "double"}}}},
+    {"$group": {"_id": None, "count": { "$sum": { "$multiply": [ "$price", "$sold" ] } }}},
+    {"$out" : "gains_collection"}
+]');
 INSERT INTO "CountGains" VALUES ('None','550812.16');
 
 
@@ -129,7 +212,7 @@ CREATE TABLE IF NOT EXISTS "CountCity" (
 	"_id" TEXT NOT NULL UNIQUE,
 	"count" TEXT NOT NULL
 );
-INSERT INTO "TaskReview" VALUES (106,'DFP','','SELECT * FROM CountCity;','Irgendeine Lösung');
+INSERT INTO "TaskReview" VALUES (602,'DFP','Um das Zählen eines Wertes durchzuführen kann eine Gruppierung in Kombination mit dem gezählten Feld und einem neu angelegten Feld erstellt werden. Dies kann Beispielsweise so aussehen: {"_id": "$count_field","count": { "$sum": 1 }','SELECT * FROM CountCity;','Irgendeine Lösung');
 INSERT INTO "CountCity" VALUES ('Stockholm','3');
 
 DROP TABLE IF EXISTS "MoreThan25";
@@ -137,7 +220,7 @@ CREATE TABLE IF NOT EXISTS "MoreThan25" (
 	"_id" TEXT NOT NULL UNIQUE,
 	"count" TEXT NOT NULL
 );
-INSERT INTO "TaskReview" VALUES (107,'DFP','','SELECT * FROM MoreThan25;','Irgendeine Lösung');
+INSERT INTO "TaskReview" VALUES (604,'DFP','Um die gekauften Produkte zählen zu können muss in jedem Dokument der Array $cart aufgelöst werden um an die einzelnen Id zu gelangen. Danach kann eine Gruppierung mit einem Feld für das Zählen festgelegt werden und auf diesem Feld der $gt Operator angewendet werden.','SELECT * FROM MoreThan25;','Irgendeine Lösung');
 INSERT INTO "MoreThan25" VALUES ('None','41');
 
 
