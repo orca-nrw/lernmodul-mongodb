@@ -13,7 +13,7 @@ RUN pip3 install --no-cache --upgrade pip && \
     pip3 install --no-cache notebook matplotlib ipywidgets && \
     pip3 install --no-cache pandas && \
     pip3 install --no-cache pymongo && \
-    pip3 install -i https://test.pypi.org/simple/ jupyternb-task-review && \
+    pip3 install jupyternb-task-review && \
     pip3 install -i https://test.pypi.org/simple/ jupyternb-lti-connector
 
 
