@@ -58,13 +58,33 @@ INSERT INTO "TaskReview" VALUES (51,'MC','',json_array('1', '3','5','6'),
                                        ' "7": "set",' ||
                                        ' "8": "equals"}' ));
 
-INSERT INTO "TaskReview" VALUES (71,'SC','Die Anwtort steht oben im Einleitungstext für das Map-Reduce Verfahren.','5',json('{"1": "Number", "2": "Int", "3":  "Varchar", "4":  "String", "5":  "ObjectId", "6":  "ID"}'));
-INSERT INTO "TaskReview" VALUES (72,'SC','Die Anwtort steht oben im Einleitungstext für das Map-Reduce Verfahren.','5',json('{"1": "Number", "2": "Int", "3":  "Varchar", "4":  "String", "5":  "ObjectId", "6":  "ID"}'));
-INSERT INTO "TaskReview" VALUES (73,'MC','Die Anwtort steht oben im Einleitungstext für das Map-Reduce Verfahren.',json_array('1', '2'),
+INSERT INTO "TaskReview" VALUES (71,'MC','Die Antwort steht oben im Einleitungstext für das Map-Reduce Verfahren.',json_array('1', '2','4'),
+                                 json('{"1": "Werten werden einem Schlüssel zugeordnet.", ' ||
+                                        '"2": "Werte werden mit anderen Schlüsseln zugeordnet",' ||
+                                       ' "3":  "Die angegebenen Schlüssel werden gezählt und aufgelistet",' ||
+                                       ' "4":  "Alle Dokumente in der Kollektion mit dem gleichen Schlüssel und dem dazugehörigen Wert werden zusammengefasst",' ||
+                                       ' "5":  "Die Map Funktion erfasst dabei Dokumente aus mehreren Kollektionen",' ||
+                                       ' "6":  "Die angegebenen Schlüssel werden in einer neuen Kollektion aufgelistet"}'));
+INSERT INTO "TaskReview" VALUES (72,'MC','Die Antwort steht oben im Einleitungstext für das Map-Reduce Verfahren.',json_array('1','4'),
+                                 json('{"1":  "Betrachtet die Schlüssel und fasst Werte die bei identischen Schlüsseln vorkommen zusammen", ' ||
+                                      '"2":  "Vergleicht die Werte die aus der Map Funktion stammen mit den Werten aus der Kollektion", ' ||
+                                      '"3":  "Fasst die Werte aus der Map Funktion in einer neuen Kollektion zusammen", ' ||
+                                      '"4":  "Fasst die Werte aus der Map Funktion zusammen, damit diese in einem einzelnen Objekt ausgegeben werden können"}'));
+INSERT INTO "TaskReview" VALUES (73,'MC','Die Antwort steht oben im Einleitungstext für das Map-Reduce Verfahren.',json_array('1', '2'),
                                  json('{"1": "Map Reduce hat eine geringere Performance",' ||
                                       ' "2": "Die Usability der Aggregation Pipeline ist besser",' ||
                                       ' "3": "Das Map-Recue Verfahren kann durch die verwendung von JavaScript umfangreichere Queries erstellen"}'));
 
+INSERT INTO "TaskReview" VALUES (81,'SC','Als Hilfe können Sie nochmal im Kapitel 2.2 nachschauen.','2',
+                                 json('{"1": "One-to-One with Document References",' ||
+                                      ' "2": "One-to-Many with Document References",' ||
+                                      ' "3": "Many-to-Many with Embedded Documents"}'));
+
+INSERT INTO "TaskReview" VALUES (82,'SC','Dies kann aus der Chunks Kollektion ausgelesen werden. Dieser Schritt wurde in der vorherigen Erklärung bereits einmal durchgeführt.','4',
+                                 json('{"1": "Eine Id wird für jeden einzelnen Chunk neu erstellt und hat deshalb immer einen unterschiedlichen Schlüssel",' ||
+                                      ' "2": "Die Id welche auf die einzelnen Chunks zeigt ist die ObjectID",' ||
+                                      ' "3": "Die Id kann frei benannt und in die Metadaten eingefügt werden",' ||
+                                      ' "4": "Die Id welche auf die einzelnen Chunks zeigt ist die files_id"}'));
 
 DROP TABLE IF EXISTS "User";
 CREATE TABLE IF NOT EXISTS "User" (
@@ -223,10 +243,37 @@ CREATE TABLE IF NOT EXISTS "MoreThan25" (
 INSERT INTO "TaskReview" VALUES (604,'DFP','Um die gekauften Produkte zählen zu können muss in jedem Dokument der Array $cart aufgelöst werden um an die einzelnen Id zu gelangen. Danach kann eine Gruppierung mit einem Feld für das Zählen festgelegt werden und auf diesem Feld der $gt Operator angewendet werden.','SELECT * FROM MoreThan25;','Irgendeine Lösung');
 INSERT INTO "MoreThan25" VALUES ('None','41');
 
+DROP TABLE IF EXISTS "GridFSchecksum";
+CREATE TABLE IF NOT EXISTS "GridFSchecksum" (
+	"md5" TEXT NOT NULL UNIQUE
+);
+INSERT INTO "GridFSchecksum" VALUES ('6b5a116597de1fe10e278c4e6c37ec59');
+INSERT INTO "TaskReview" VALUES (801,'DFP','Die Query benötigt die richtige File ID. Der Key für die Prüfsumme steht im Dokument selbst.','SELECT * FROM GridFSchecksum;','query = {"_id":"p#175"}
+for files in files_col.find(query):
+    pprint(files.get("md5"))');
 
+DROP TABLE IF EXISTS "GridFSmetadata";
+CREATE TABLE IF NOT EXISTS "GridFSmetadata" (
+	"_id" TEXT NOT NULL UNIQUE,
+	"product" TEXT NOT NULL,
+	"price"	TEXT,
+	"in_stock"	TEXT NOT NULL,
+	"sold"	TEXT NOT NULL
+);
+INSERT INTO "GridFSmetadata" VALUES ('5fe6fc8ba789e6e217ef8748',
+                                     'False',
+                                     '€21.15',
+                                     'Spice - Paprika',
+                                     '100'
+                                     );
+INSERT INTO "TaskReview" VALUES (802,'DFP','Es muss dazu die ID aus dem Metadaten ausgelesen werden. Dies ist mit get("meta").get("product_image_id") möglich.','SELECT * FROM GridFSmetadata;',
+                                 'query = {"_id":"p#175"}
+for files in files_col.find(query):
+    product_id = files.get("meta").get("product_image_id")
 
-
-
+query = {"_id":ObjectId(product_id)}
+for product in grocery_col.find(query):
+    pprint(product)');
 
 
 
