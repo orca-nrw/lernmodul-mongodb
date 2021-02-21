@@ -38,7 +38,7 @@ INSERT INTO "TaskReview" VALUES (42,'SC','','2',
 
 INSERT INTO "TaskReview" VALUES (43,'SC','','2',
                                   json('{"1": "463",' ||
-                                       ' "2": "1000",' ||
+                                       ' "2": "1002",' ||
                                        ' "3": "5476",' ||
                                        ' "4": "8469"}'));
 
@@ -175,9 +175,9 @@ df = pd.DataFrame(result)
 df = df.astype(str)
 mongo_lm.show_task(502,df)');
 
-INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef870f','Pastry - Plain Baked Croissant','€4.39','True','95','76');
 INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef8710','Scallops - U - 10','€18.70','True','72','46');
 INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef8712','Beer - Camerons Cream Ale','€20.19','True','25','60');
+INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef871b','Blouse / Shirt / Sweater','€2.92','True','68','83');
 
 DROP TABLE IF EXISTS "VorratProdukt";
 CREATE TABLE IF NOT EXISTS "VorratProdukt" (
@@ -260,12 +260,7 @@ CREATE TABLE IF NOT EXISTS "GridFSmetadata" (
 	"in_stock"	TEXT NOT NULL,
 	"sold"	TEXT NOT NULL
 );
-INSERT INTO "GridFSmetadata" VALUES ('5fe6fc8ba789e6e217ef8748',
-                                     'Spice - Paprika',
-                                     '€21.15',
-                                     'False',
-                                     '100'
-                                     );
+INSERT INTO "GridFSmetadata" VALUES ('5fe6fc8ba789e6e217ef8748','Spice - Paprika','€21.15','False','100');
 INSERT INTO "TaskReview" VALUES (802,'DFP','Es muss dazu die ID aus dem Metadaten ausgelesen werden. Dies ist mit get("meta").get("product_image_id") möglich.','SELECT * FROM GridFSmetadata;',
                                  'query = {"_id":"p#175"}
 for files in files_col.find(query):
@@ -288,20 +283,155 @@ CREATE TABLE IF NOT EXISTS "End_limit_3" (
 	"payed"	TEXT NOT NULL,
 	"purchased"	TEXT NOT NULL
 );
-INSERT INTO "End_limit_3" VALUES ('T02z-855-Mmd-Jsm-817-2wZ',
-                                     '5fe60bb2fc13ae64ea000092',
-                                     'LV27 BKEF A2V8 UBSZ NYCC A',
+INSERT INTO "End_limit_3" VALUES ('TJTj-238-ypT-2XA-389-Tv0',
+                                     '5fe60bb5fc13ae64ea000373',
+                                     'MU90 CVRW 4031 7723 2292 9086 263O YZ',
                                      'None',
-                                     '2020-01-02 08:23:39',
-                                     '40.18',
+                                     '2020-12-15 06:11:35',
+                                     '29.18',
                                      'False',
-                                     '[ObjectId("5fe6fc8ba789e6e217ef8ab7"),ObjectId("5fe6fc8ba789e6e217ef8aa8"),ObjectId("5fe6fc8ba789e6e217ef88ff")]');
+                                     '[5fe6fc8ba789e6e217ef8ac5, 5fe6fc8ba789e6e217ef89df]');
 
-INSERT INTO "TaskReview" VALUES (901,'DFP','','SELECT * FROM End_limit_3;',
-                                 'cursor = trans_col.find({}).limit(3)
-df = pd.DataFrame(cursor)
-df');
+INSERT INTO "TaskReview" VALUES (901,'DFP','Die richtige ID muss in der find() Methode angegeben werden.','SELECT * FROM End_limit_3;',
+                                 'cursor = trans_col.find({"_id" : "TJTj-238-ypT-2XA-389-Tv0" })
+');
 
+DROP TABLE IF EXISTS "End_find_products";
+CREATE TABLE IF NOT EXISTS "End_find_products" (
+	"_id" TEXT NOT NULL,
+	"customer" TEXT NOT NULL,
+	"IBAN"	TEXT,
+	"credit_card"	TEXT NOT NULL,
+	"timestamp"	TEXT NOT NULL,
+	"costs"	TEXT NOT NULL,
+	"payed"	TEXT NOT NULL,
+	"purchased"	TEXT NOT NULL UNIQUE
+);
+INSERT INTO "End_find_products" VALUES ('TJTj-238-ypT-2XA-389-Tv0',
+                                     '5fe60bb5fc13ae64ea000373',
+                                     'MU90 CVRW 4031 7723 2292 9086 263O YZ',
+                                     'None',
+                                     '2020-12-15 06:11:35',
+                                     '29.18',
+                                     'False',
+                                     '5fe6fc8ba789e6e217ef8ac5');
+INSERT INTO "End_find_products" VALUES ('TJTj-238-ypT-2XA-389-Tv0',
+                                     '5fe60bb5fc13ae64ea000373',
+                                     'MU90 CVRW 4031 7723 2292 9086 263O YZ',
+                                     'None',
+                                     '2020-12-15 06:11:35',
+                                     '29.18',
+                                     'False',
+                                     '5fe6fc8ba789e6e217ef89df');
+
+INSERT INTO "TaskReview" VALUES (902,'DFP','Hierzu wird der $match und der $unwind Operator benötigt.','SELECT * FROM End_find_products;',
+                                 'pipeline = [
+    {"$match": {"_id" : "TJTj-238-ypT-2XA-389-Tv0" }},
+    {"$unwind": "$purchased"}
+]');
+
+
+DROP TABLE IF EXISTS "End_find_products";
+CREATE TABLE IF NOT EXISTS "End_find_products" (
+	"_id" TEXT NOT NULL UNIQUE,
+	"product" TEXT NOT NULL,
+	"price"	TEXT,
+	"in_stock"	TEXT NOT NULL,
+	"sold"	TEXT NOT NULL,
+	"stock"	TEXT NOT NULL
+);
+INSERT INTO "End_find_products" VALUES ('5fe6fc8ba789e6e217ef89df','Wine - Blue Nun Qualitatswein','€14.21','True','59','3.0');
+INSERT INTO "End_find_products" VALUES ('5fe6fc8ba789e6e217ef8ac5','Mint - Fresh','€14.97','False','28','nan');
+INSERT INTO "TaskReview" VALUES (903,'DFP','Die find() Methode kann mit dem Operator $in verbunden werden um aus einem Array mehrere Ids auszulesen.','SELECT * FROM End_find_products;',
+                                 'products = grocery_col.find({"_id":{"$in":[ObjectId("5fe6fc8ba789e6e217ef8ac5"),ObjectId("5fe6fc8ba789e6e217ef89df")]}})
+');
+
+
+DROP TABLE IF EXISTS "Maria_Holm";
+CREATE TABLE IF NOT EXISTS "Maria_Holm" (
+	"_id" TEXT NOT NULL UNIQUE,
+	"first_name" TEXT NOT NULL,
+	"last_name"	TEXT,
+	"email"	TEXT NOT NULL,
+	"last_login"	TEXT NOT NULL,
+	"registration_date"	TEXT NOT NULL,
+	"address"	TEXT NOT NULL,
+	"cart"	TEXT NOT NULL
+);
+INSERT INTO "Maria_Holm" VALUES ('600c7584096cd4ef6296c6cf','Maria','Holm','hmari@doublt.com','2021-01-08 11:42:00','2013-07-22 05:42:00','{''country'': ''Canada'', ''city'': ''Toronto'', ''street'': ''2 Livester Road'', ''zip'': 12549}','[ObjectId(''5fe6fc8ba789e6e217ef8715''), ObjectId(''5fe6fc8ba789e6e217ef8716'')]');
+INSERT INTO "TaskReview" VALUES (904,'DFP','Zuerst muss die ID von Maria herausgefunden werden. Die Update Methode bekommt die ID des Dokuments das geupdatet wird und den Operator $set welcher das jeweilige Feld updatet. Das Feld cart ist ein Array.','SELECT * FROM Maria_Holm;',
+                                 'maria_doc = customer_col.find({"first_name":"Maria"})
+
+for doc in maria_doc:
+    maria_id = doc.get("_id")
+
+customer_col.update_one(
+    { "_id": maria_id  },
+    { "$set": { "cart": [ObjectId("5fe6fc8ba789e6e217ef8715"),ObjectId("5fe6fc8ba789e6e217ef8716")] } },
+);
+');
+
+
+DROP TABLE IF EXISTS "Customer_wiht_id";
+CREATE TABLE IF NOT EXISTS "Customer_wiht_id" (
+	"_id" TEXT NOT NULL UNIQUE,
+	"first_name" TEXT NOT NULL,
+	"last_name"	TEXT,
+	"email"	TEXT NOT NULL,
+	"last_login"	TEXT NOT NULL,
+	"registration_date"	TEXT NOT NULL,
+	"address"	TEXT NOT NULL,
+	"cart"	TEXT NOT NULL
+);
+INSERT INTO "Customer_wiht_id" VALUES ('600c7545096cd4ef6296c6ba',
+                                       'Ben',
+                                       'Kingsley',
+                                       'bking@doublt.com',
+                                       '2021-01-01 07:42:00',
+                                       '2016-04-29 07:42:00',
+                                       '{''country'': ''USA'', ''city'': ''New York'', ''street'': ''4 Crossing Road'', ''zip'': 77476}',
+                                       '[ObjectId(''5fe6fc8ba789e6e217ef872f''), ObjectId(''5fe6fc8ba789e6e217ef872f'')]');
+INSERT INTO "TaskReview" VALUES (905,'DFP','Die Update Methode bekommt die ID des Dokuments das geupdatet wird und den Operator $set welcher das jeweilige Feld updatet. Das Feld cart ist ein Array.','SELECT * FROM Customer_wiht_id;',
+                                 'customer_col.update_one(
+    { "_id": ObjectId("600c7545096cd4ef6296c6ba")  },
+    { "$set": { "cart": [ObjectId("5fe6fc8ba789e6e217ef872f"),ObjectId("5fe6fc8ba789e6e217ef872f")] } },
+);
+');
+
+
+DROP TABLE IF EXISTS "Customer_wiht_id";
+CREATE TABLE IF NOT EXISTS "Customer_wiht_id" (
+	"_id" TEXT NOT NULL UNIQUE,
+	"IBAN" TEXT NOT NULL,
+	"costs"	TEXT,
+	"credit_card"	TEXT NOT NULL,
+	"customer"	TEXT NOT NULL,
+	"payed"	TEXT NOT NULL,
+	"purchased"	TEXT NOT NULL,
+	"timestamp"	TEXT NOT NULL
+);
+INSERT INTO "Customer_wiht_id" VALUES ('TSE-184-4cB-FcF45-ACE',
+                                       'MU90 CVRW 4031 7723 2292 9086 263O YZ',
+                                       '29.18',
+                                       'None',
+                                       '5fe60bb5fc13ae64ea000373',
+                                       'False',
+                                       '[ObjectId(''5fe6fc8ba789e6e217ef8ac5''), ObjectId(''5fe6fc8ba789e6e217ef89df'')]',
+                                       '2020-12-15 06:11:35');
+INSERT INTO "TaskReview" VALUES (906,'DFP','Erstellen Sie ein neues Dokument welches alle Informationen enthällt. Die Ids für die Produkte können Sie aus den vorherigen Aufgaben entnehmen. Den Preis können Sie selbst zusammenrechnen und manuell als Integer einfügen.','SELECT * FROM Customer_wiht_id;',
+                                 'new_doc = {
+ ''IBAN'': ''MU90 CVRW 4031 7723 2292 9086 263O YZ'',
+ ''_id'': ''TSE-184-4cB-FcF45-ACE'',
+ ''costs'': 29.18,
+ ''credit_card'': None,
+ ''customer'': ObjectId(''5fe60bb5fc13ae64ea000373''),
+ ''payed'': False,
+ ''purchased'': [ObjectId(''5fe6fc8ba789e6e217ef8ac5''),
+               ObjectId(''5fe6fc8ba789e6e217ef89df'')],
+ ''timestamp'': datetime.datetime(2020, 12, 15, 6, 11, 35)}
+
+trans_col.insert_one(new_doc)
+');
 
 
 COMMIT;
