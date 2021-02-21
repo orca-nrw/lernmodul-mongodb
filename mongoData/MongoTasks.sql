@@ -277,4 +277,31 @@ for product in grocery_col.find(query):
 
 
 
+DROP TABLE IF EXISTS "End_limit_3";
+CREATE TABLE IF NOT EXISTS "End_limit_3" (
+	"_id" TEXT NOT NULL UNIQUE,
+	"customer" TEXT NOT NULL,
+	"IBAN"	TEXT,
+	"credit_card"	TEXT NOT NULL,
+	"timestamp"	TEXT NOT NULL,
+	"costs"	TEXT NOT NULL,
+	"payed"	TEXT NOT NULL,
+	"purchased"	TEXT NOT NULL
+);
+INSERT INTO "End_limit_3" VALUES ('T02z-855-Mmd-Jsm-817-2wZ',
+                                     '5fe60bb2fc13ae64ea000092',
+                                     'LV27 BKEF A2V8 UBSZ NYCC A',
+                                     'None',
+                                     '2020-01-02 08:23:39',
+                                     '40.18',
+                                     'False',
+                                     '[ObjectId("5fe6fc8ba789e6e217ef8ab7"),ObjectId("5fe6fc8ba789e6e217ef8aa8"),ObjectId("5fe6fc8ba789e6e217ef88ff")]');
+
+INSERT INTO "TaskReview" VALUES (901,'DFP','','SELECT * FROM End_limit_3;',
+                                 'cursor = trans_col.find({}).limit(3)
+df = pd.DataFrame(cursor)
+df');
+
+
+
 COMMIT;
