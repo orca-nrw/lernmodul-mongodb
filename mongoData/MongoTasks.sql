@@ -96,7 +96,15 @@ CREATE TABLE IF NOT EXISTS "User" (
 	"last_login"	TEXT NOT NULL,
 	"registration_date" TEXT
 );
-INSERT INTO "TaskReview" VALUES (301,'DFP','TIPP','SELECT * FROM User WHERE _id=''775'';','Irgendeine Lösung');
+INSERT INTO "TaskReview" VALUES (301,'DFP','TIPP','SELECT * FROM User WHERE _id=''775'';','new_customer = {
+    "_id":775,
+    "first_name" : "Manuel",
+    "last_name" : "Mustermann",
+    "email" : "Manuel@Mustermann.de",
+    "phone_number" : "+49 125 145 1258",
+    "last_login" : datetime(2019,12,4),
+    "registration_date" : datetime(2010,10,9)
+}');
 INSERT INTO "User" VALUES (
 '775',
 'Manuel',
