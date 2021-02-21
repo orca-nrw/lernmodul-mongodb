@@ -261,9 +261,9 @@ CREATE TABLE IF NOT EXISTS "GridFSmetadata" (
 	"sold"	TEXT NOT NULL
 );
 INSERT INTO "GridFSmetadata" VALUES ('5fe6fc8ba789e6e217ef8748',
-                                     'False',
-                                     '€21.15',
                                      'Spice - Paprika',
+                                     '€21.15',
+                                     'False',
                                      '100'
                                      );
 INSERT INTO "TaskReview" VALUES (802,'DFP','Es muss dazu die ID aus dem Metadaten ausgelesen werden. Dies ist mit get("meta").get("product_image_id") möglich.','SELECT * FROM GridFSmetadata;',
