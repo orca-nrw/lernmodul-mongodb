@@ -54,4 +54,4 @@ RUN chmod 777 /home/${NB_USER}/index.ipynb && \
 
 EXPOSE 27017
 
-#entrypoint ${HOME}/entrypoint.sh
+CMD ["jupyter", "notebook", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root", "&&", "mongod", "--config /home/jovyan/mongod.conf"]
