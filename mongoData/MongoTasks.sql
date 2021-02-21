@@ -407,8 +407,8 @@ INSERT INTO "TaskReview" VALUES (905,'DFP','Die Update Methode bekommt die ID de
 ');
 
 
-DROP TABLE IF EXISTS "Customer_wiht_id";
-CREATE TABLE IF NOT EXISTS "Customer_wiht_id" (
+DROP TABLE IF EXISTS "Maria_products";
+CREATE TABLE IF NOT EXISTS "Maria_products" (
 	"_id" TEXT NOT NULL UNIQUE,
 	"IBAN" TEXT NOT NULL,
 	"costs"	TEXT,
@@ -418,7 +418,7 @@ CREATE TABLE IF NOT EXISTS "Customer_wiht_id" (
 	"purchased"	TEXT NOT NULL,
 	"timestamp"	TEXT NOT NULL
 );
-INSERT INTO "Customer_wiht_id" VALUES ('TSE-184-4cB-FcF45-ACE',
+INSERT INTO "Maria_products" VALUES ('TSE-184-4cB-FcF45-ACE',
                                        'MU90 CVRW 4031 7723 2292 9086 263O YZ',
                                        '29.18',
                                        'None',
@@ -426,7 +426,7 @@ INSERT INTO "Customer_wiht_id" VALUES ('TSE-184-4cB-FcF45-ACE',
                                        'False',
                                        '[ObjectId(''5fe6fc8ba789e6e217ef8ac5''), ObjectId(''5fe6fc8ba789e6e217ef89df'')]',
                                        '2020-12-15 06:11:35');
-INSERT INTO "TaskReview" VALUES (906,'DFP','Erstellen Sie ein neues Dokument welches alle Informationen enthällt. Die Ids für die Produkte können Sie aus den vorherigen Aufgaben entnehmen. Den Preis können Sie selbst zusammenrechnen und manuell als Integer einfügen.','SELECT * FROM Customer_wiht_id;',
+INSERT INTO "TaskReview" VALUES (906,'DFP','Erstellen Sie ein neues Dokument welches alle Informationen enthält. Die Ids für die Produkte können Sie aus den vorherigen Aufgaben entnehmen. Den Preis können Sie selbst zusammenrechnen und manuell als Integer einfügen.','SELECT * FROM Maria_products;',
                                  'new_doc = {
  ''IBAN'': ''MU90 CVRW 4031 7723 2292 9086 263O YZ'',
  ''_id'': ''TSE-184-4cB-FcF45-ACE'',
