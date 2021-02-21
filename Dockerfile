@@ -47,7 +47,6 @@ RUN chown -R mongodb:mongodb ${HOME}/data && \
 
 # copy the notebook data and change permission
 COPY . ${HOME}
-RUN chmod 777 ${HOME}/entrypoint.sh
 RUN chmod -R 777 ${HOME}/gridFS/
 RUN chmod 777 /home/${NB_USER}/index.ipynb && \
     touch ${HOME}/mongod.log && chmod 777 ${HOME}/mongod.log
