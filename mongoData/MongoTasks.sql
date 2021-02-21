@@ -298,24 +298,24 @@ INSERT INTO "End_limit_3" VALUES ('TJTj-238-ypT-2XA-389-Tv0',
                                      '2020-12-15 06:11:35',
                                      '29.18',
                                      'False',
-                                     '[5fe6fc8ba789e6e217ef8ac5, 5fe6fc8ba789e6e217ef89df]');
+                                     '[ObjectId(''5fe6fc8ba789e6e217ef8ac5''), ObjectId(''5fe6fc8ba789e6e217ef89df'')]');
 
 INSERT INTO "TaskReview" VALUES (901,'DFP','Die richtige ID muss in der find() Methode angegeben werden.','SELECT * FROM End_limit_3;',
                                  'cursor = trans_col.find({"_id" : "TJTj-238-ypT-2XA-389-Tv0" })
 ');
 
-DROP TABLE IF EXISTS "End_find_products";
-CREATE TABLE IF NOT EXISTS "End_find_products" (
+DROP TABLE IF EXISTS "End_unwind";
+CREATE TABLE IF NOT EXISTS "End_unwind" (
 	"_id" TEXT NOT NULL,
 	"customer" TEXT NOT NULL,
-	"IBAN"	TEXT,
-	"credit_card"	TEXT NOT NULL,
+	"IBAN" TEXT,
+	"credit_card" TEXT NOT NULL,
 	"timestamp"	TEXT NOT NULL,
 	"costs"	TEXT NOT NULL,
 	"payed"	TEXT NOT NULL,
-	"purchased"	TEXT NOT NULL UNIQUE
+	"purchased"	TEXT NOT NULL
 );
-INSERT INTO "End_find_products" VALUES ('TJTj-238-ypT-2XA-389-Tv0',
+INSERT INTO "End_unwind" VALUES ('TJTj-238-ypT-2XA-389-Tv0',
                                      '5fe60bb5fc13ae64ea000373',
                                      'MU90 CVRW 4031 7723 2292 9086 263O YZ',
                                      'None',
@@ -323,7 +323,7 @@ INSERT INTO "End_find_products" VALUES ('TJTj-238-ypT-2XA-389-Tv0',
                                      '29.18',
                                      'False',
                                      '5fe6fc8ba789e6e217ef8ac5');
-INSERT INTO "End_find_products" VALUES ('TJTj-238-ypT-2XA-389-Tv0',
+INSERT INTO "End_unwind" VALUES ('TJTj-238-ypT-2XA-389-Tv0',
                                      '5fe60bb5fc13ae64ea000373',
                                      'MU90 CVRW 4031 7723 2292 9086 263O YZ',
                                      'None',
@@ -332,7 +332,7 @@ INSERT INTO "End_find_products" VALUES ('TJTj-238-ypT-2XA-389-Tv0',
                                      'False',
                                      '5fe6fc8ba789e6e217ef89df');
 
-INSERT INTO "TaskReview" VALUES (902,'DFP','Hierzu wird der $match und der $unwind Operator benötigt.','SELECT * FROM End_find_products;',
+INSERT INTO "TaskReview" VALUES (902,'DFP','Hierzu wird der $match und der $unwind Operator benötigt.','SELECT * FROM End_unwind;',
                                  'pipeline = [
     {"$match": {"_id" : "TJTj-238-ypT-2XA-389-Tv0" }},
     {"$unwind": "$purchased"}
