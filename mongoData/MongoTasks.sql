@@ -8,18 +8,18 @@ CREATE TABLE IF NOT EXISTS "TaskReview" (
 	"additionalInformation"	TEXT NOT NULL
 );
 INSERT INTO "TaskReview" VALUES (21,'SC','Schau nochmal unter Punkt 2.1 nach.','5',json('{"1": "Number", "2": "Int", "3":  "Varchar", "4":  "String", "5":  "ObjectId", "6":  "ID"}'));
-INSERT INTO "TaskReview" VALUES (22,'SC','TIPP','2',json('{"1": "In einer Textdatei,In einer Tabelle mit Spalten und Zeilen", "2": "In Dokumenten mit Key/Value Paaren"}'));
-INSERT INTO "TaskReview" VALUES (23,'SC','TIPP','2',json('{"1": "JSON", "2": "BSON", "3":  "CSV", "4":  "XML", "5":  "DType"}'));
-INSERT INTO "TaskReview" VALUES (24,'SC','Embedded Document sind Dokumente welche als Objekt innerhalb eines anderen Dokumentes abgespeichert werden','1',
+INSERT INTO "TaskReview" VALUES (22,'SC','Schau nochmal unter Punkt 2 nach.','2',json('{"1": "In einer Textdatei,In einer Tabelle mit Spalten und Zeilen", "2": "In Dokumenten mit Key/Value Paaren"}'));
+INSERT INTO "TaskReview" VALUES (23,'SC','Schau nochmal unter Punkt 2.1 nach.','2',json('{"1": "JSON", "2": "BSON", "3":  "CSV", "4":  "XML", "5":  "DType"}'));
+INSERT INTO "TaskReview" VALUES (24,'SC','Embedded Document sind Dokumente welche als Objekt innerhalb eines anderen Dokumentes abgespeichert werden.','1',
                                  json('{"1": "{info:{price:123}}", "2": "{info:[price:123]}", "3": "{info:123}"}'));
 
-INSERT INTO "TaskReview" VALUES (31,'SC','Siehe nochmal beim Anlegen eines neuen Dokumentes nach.','3',
+INSERT INTO "TaskReview" VALUES (31,'SC','Siehe nochmal bei "Ein Dokument anlegen und in der Collection abspeichern" eines neuen Dokumentes nach.','3',
                                 json('{"1": "Sofern kein eigener Primärschlüssel definiert wird muss die ObjectId immer angegeben werden",' ||
-                                     ' "2": "Die MongoDB Identifiziert anhand aller Key/Value Paare im Dokument",' ||
+                                     ' "2": "Die MongoDB Identifiziert Dokumente anhand aller Schlüssel/Wert Paare im Dokument",' ||
                                      ' "3": "Die ObjectId wird automatisch von der MongoDB generiert",' ||
-                                     ' "4": "Sofern kein eigener Primärschlüssel definiert wird",' ||
-                                     ' "5": "Weil die MongoDB keine Primärschlüssel besitzt und Dokumente redundant vorkommen können"}'));
-INSERT INTO "TaskReview" VALUES (32,'SC','Siehe nochmal beim Filtern von Daten nach.',
+                                     ' "4": "Weil die MongoDB keine Primärschlüssel besitzt und Dokumente redundant vorkommen können"}'));
+
+INSERT INTO "TaskReview" VALUES (32,'SC','Siehe nochmal bei "Ein Dokument anhand eines Vergleichsdokumentes auslesen" nach.',
                                  '2',
                                  json('{"1": "Der Cursor zeigt bei jeder Ausführung die angeforderten Daten an", "2": "Der Cursor ist ein Pointer und zeigt nur einmal auf die Daten -> Der Cursor muss erneut auf die Daten zeigen"}'));
 INSERT INTO "TaskReview" VALUES (33,'SC','','3',
@@ -48,6 +48,22 @@ INSERT INTO "TaskReview" VALUES (44,'SC','','2',
                                        ' "3": "5476",' ||
                                        ' "4": "1"}' ));
 
+INSERT INTO "TaskReview" VALUES (45,'SC','Siehe nochmal bei "Auslesen der Daten aus dem Embedded Document und dem Array" nach.','2',
+                                        json('{"1": "Um nur dir Felder aus der Suchanfrage anzuzeigen.",' ||
+                                       ' "2": "Um alle Felder anzuzeigen die mit einem Wert von 1 versehen sind und eine 0 wenn diese nicht angezeigt werden sollen.",' ||
+                                       ' "3": "Eine Projektion definiert die Felder die in der Kollektion gefunden werden sollen."}' ));
+
+INSERT INTO "TaskReview" VALUES (46,'SC','Siehe nochmal bei "Auslesen der Daten aus dem Embedded Document und dem Array" nach.','4',
+                                        json('{"1": "Es werden nur die Felder angezeigt die in der Anfrage enthalten sind.",' ||
+                                       ' "2": "Es wird nur die _id zurückgegeben, damit ersichtlich ist, das dass Dokument existiert.",' ||
+                                       ' "3": "Alle Dokumente aus der Suchanfrage die in der Kollektion enthalten sind werden zurückgegeben.",' ||
+                                       ' "4": "Alle Felder der gefundenen Dokumente werden zurückgegeben"}' ));
+
+INSERT INTO "TaskReview" VALUES (47,'SC','Siehe nochmal beim auslesen der Customer und Grocery Kollektion nach.','1',
+                                        json('{"1": "Ja, allerdings müssen die erhaltenen Dokumente noch mit Python gefiltert werden.",' ||
+                                       ' "2": "Ja, das ist mit den definierten Suchkriterien und den Projections möglich.",' ||
+                                       ' "3": "Nein, dies ist nicht möglich."}' ));
+
 INSERT INTO "TaskReview" VALUES (51,'MC','',json_array('1', '3','5','6'),
                                         json('{"1": "$eq",' ||
                                        ' "2": "or",' ||
@@ -57,6 +73,11 @@ INSERT INTO "TaskReview" VALUES (51,'MC','',json_array('1', '3','5','6'),
                                        ' "6": "$set",' ||
                                        ' "7": "set",' ||
                                        ' "8": "equals"}' ));
+
+INSERT INTO "TaskReview" VALUES (52,'SC','Siehe nochmal bei dem Bild über die Syntax der MongoDB Operatoren nach.','2',
+                                        json('{"1": "Das Symbol wird verwendet sofern mit Werten vom Typ Number, Integer oder Double gearbeitet wird.",' ||
+                                       ' "2": "Muss bei allen Operatoren angegeben werden um den Operator auf das angegebene Feld zu verweisen.",' ||
+                                       ' "3": "Definiert den Schlüssel in dem Das Ergebnis der Anfrage gespeichert werden soll."}' ));
 
 INSERT INTO "TaskReview" VALUES (71,'MC','Die Antwort steht oben im Einleitungstext für das Map-Reduce Verfahren.',json_array('1', '2','4'),
                                  json('{"1": "Werten werden einem Schlüssel zugeordnet.", ' ||
@@ -196,7 +217,7 @@ CREATE TABLE IF NOT EXISTS "VorratProdukt" (
 	"sold"	TEXT NOT NULL,
 	"stock" TEXT NOT NULL
 );
-INSERT INTO "TaskReview" VALUES (503,'DFP','Sie benötigen hierführ $and, $gte/gt, $lte/lt. Der $and Operator erhällt einen Array als input.','SELECT * FROM VorratProdukt;',
+INSERT INTO "TaskReview" VALUES (503,'DFP','Sie benötigen hierführ $and, $gte/gt, $lte/lt. Der $and Operator erhällt einen Array [{},{}] als input und wurde bei den Beispielen bereits verwendet.','SELECT * FROM VorratProdukt;',
                                  'customer_col = store_db["Grocery"]
 result = grocery_col.find({"$and": [{"sold":{"$gte":90}},{"in_stock":True},{"stock":{"$lte":5}}]})
 df = pd.DataFrame(result)
@@ -259,6 +280,31 @@ INSERT INTO "GridFSchecksum" VALUES ('6b5a116597de1fe10e278c4e6c37ec59');
 INSERT INTO "TaskReview" VALUES (801,'DFP','Die Query benötigt die richtige File ID. Der Key für die Prüfsumme steht im Dokument selbst.','SELECT * FROM GridFSchecksum;','query = {"_id":"p#175"}
 for files in files_col.find(query):
     pprint(files.get("md5"))');
+
+
+DROP TABLE IF EXISTS "MapReduce";
+CREATE TABLE IF NOT EXISTS "MapReduce" (
+	"_id" TEXT NOT NULL UNIQUE,
+	"value" TEXT NOT NULL
+);
+INSERT INTO "MapReduce" VALUES ('Longquan','2.0');
+INSERT INTO "MapReduce" VALUES ('Shuiyang','2.0');
+INSERT INTO "TaskReview" VALUES (701,'DFP','Hier müssen zuerst in einer Map "this.address.city" mit dem value 1 gemapt werden. Danach können die Values wie aus dem Beispiel addiert werden.','SELECT * FROM MapReduce;',
+                                 'new_mapper = Code("""function () {
+             if(this.address.country == "China"){
+                 emit(this.address.city,1)
+             }
+            }""")
+
+new_reducer = Code("""
+                function (key, values) {
+                  var total = 0;
+                  for (var i = 0; i < values.length; i++) {
+                    total += values[i];
+                  }
+                  return total;
+                }
+                """)');
 
 DROP TABLE IF EXISTS "GridFSmetadata";
 CREATE TABLE IF NOT EXISTS "GridFSmetadata" (
