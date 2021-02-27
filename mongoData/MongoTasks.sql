@@ -79,11 +79,11 @@ INSERT INTO "TaskReview" VALUES (52,'SC','Siehe nochmal bei dem Bild über die S
                                        ' "2": "Muss bei allen Operatoren angegeben werden um den Operator auf das angegebene Feld zu verweisen.",' ||
                                        ' "3": "Definiert den Schlüssel in dem Das Ergebnis der Anfrage gespeichert werden soll."}' ));
 
-INSERT INTO "TaskReview" VALUES (71,'MC','Die Antwort steht oben im Einleitungstext für das Map-Reduce Verfahren.',json_array('1', '2','4'),
+INSERT INTO "TaskReview" VALUES (71,'MC','Die Antwort steht oben im Einleitungstext für das Map-Reduce Verfahren.',json_array('1', '2','3','4'),
                                  json('{"1": "Werten werden einem Schlüssel zugeordnet.", ' ||
                                         '"2": "Werte werden mit anderen Schlüsseln zugeordnet",' ||
                                        ' "3":  "Die angegebenen Schlüssel werden gezählt und aufgelistet",' ||
-                                       ' "4":  "Alle Dokumente in der Kollektion mit dem gleichen Schlüssel und dem dazugehörigen Wert werden zusammengefasst",' ||
+                                       ' "4":  "Alle Dokumente in der Collection mit dem gleichen Schlüssel und dem dazugehörigen Wert werden zusammengefasst",' ||
                                        ' "5":  "Die Map Funktion erfasst dabei Dokumente aus mehreren Kollektionen",' ||
                                        ' "6":  "Die angegebenen Schlüssel werden in einer neuen Kollektion aufgelistet"}'));
 INSERT INTO "TaskReview" VALUES (72,'MC','Die Antwort steht oben im Einleitungstext für das Map-Reduce Verfahren.',json_array('1','4'),
@@ -94,7 +94,11 @@ INSERT INTO "TaskReview" VALUES (72,'MC','Die Antwort steht oben im Einleitungst
 INSERT INTO "TaskReview" VALUES (73,'MC','Die Antwort steht oben im Einleitungstext für das Map-Reduce Verfahren.',json_array('1', '2'),
                                  json('{"1": "Map Reduce hat eine geringere Performance",' ||
                                       ' "2": "Die Usability der Aggregation Pipeline ist besser",' ||
-                                      ' "3": "Das Map-Recue Verfahren kann durch die verwendung von JavaScript umfangreichere Queries erstellen"}'));
+                                      ' "3": "Das Map-Recue Verfahren kann durch die verwendung von JavaScript umfangreichere Queries als die Aggregation Pipeline erstellen"}'));
+
+INSERT INTO "TaskReview" VALUES (74,'SC','Die Antwort steht im vorletzten Absatz in der Einleitung zum Map-Reduce Verfahren.','1',
+                                        json('{"1": "Die Aggregation Pipeline ist performanter wenn die Anfragen an ein MongoDB Cluster aus mehreren Datenbanken gesendet werden.",' ||
+                                       ' "2": "Das Map-Reduce Verfahren ist performanter wenn die Anfragen an ein MongoDB Cluster aus mehreren Datenbanken gesendet werden."}' ));
 
 INSERT INTO "TaskReview" VALUES (81,'SC','Als Hilfe können Sie nochmal im Kapitel 2.2 nachschauen.','2',
                                  json('{"1": "One-to-One with Document References",' ||
@@ -106,6 +110,16 @@ INSERT INTO "TaskReview" VALUES (82,'SC','Dies kann aus der Chunks Kollektion au
                                       ' "2": "Die Id welche auf die einzelnen Chunks zeigt ist die ObjectID",' ||
                                       ' "3": "Die Id kann frei benannt und in die Metadaten eingefügt werden",' ||
                                       ' "4": "Die Id welche auf die einzelnen Chunks zeigt ist die files_id"}'));
+
+INSERT INTO "TaskReview" VALUES (83,'SC','Die Informationen hierführ sind in der Einleitung zu GridFS beschrieben.','3',
+                                 json('{"1": "255kb",' ||
+                                      ' "2": "2.4Mb",' ||
+                                      ' "3": "16MB"}'));
+
+INSERT INTO "TaskReview" VALUES (84,'SC','Die Informationen hierführ sind in der Einleitung zu GridFS beschrieben.','1',
+                                 json('{"1": "255kb",' ||
+                                      ' "2": "2.4Mb",' ||
+                                      ' "3": "16MB"}'));
 
 DROP TABLE IF EXISTS "User";
 CREATE TABLE IF NOT EXISTS "User" (
@@ -236,7 +250,7 @@ CREATE TABLE IF NOT EXISTS "DoubleProduct" (
 	"in_stock"	TEXT NOT NULL,
 	"sold"	TEXT NOT NULL
 );
-INSERT INTO "TaskReview" VALUES (601,'DFP','Dabei kann der $gt Operator in Kombination mit der Match Pipeline verwendet werden.','SELECT * FROM DoubleProduct;','pipeline = [
+INSERT INTO "TaskReview" VALUES (601,'DFP','Dabei kann der $gt Operator in Kombination mit der $match Pipeline verwendet werden.','SELECT * FROM DoubleProduct;','pipeline = [
     {"$match" : {"product":"Cocoa Powder - Natural"}},
     {"$match" : {"sold": {"$gt" : 50}}}
 ]');
@@ -247,7 +261,7 @@ CREATE TABLE IF NOT EXISTS "CountGains" (
 	"_id" TEXT NOT NULL UNIQUE,
 	"count" TEXT NOT NULL
 );
-INSERT INTO "TaskReview" VALUES (603,'DFP','Eine Stage für die Gruppierung kann mit einem $sum Operator kombiniert werden. Dadurch kann "$multiply": [ "$price", "$sold" ] implementiert werden. Der $out Operator speichert die Ergebnisse in einer neuen Collection ab. Verwenden Sie diesen als letztes in der Pipeline. ','SELECT * FROM CountGains;','pipeline = [
+INSERT INTO "TaskReview" VALUES (603,'DFP','Der $trim Operator kann wie folgt angelegt werden: {"$addFields": {"?????" : {"$trim": {"input": "$?????", "chars": "???"}}}}. Eine Stage für die Gruppierung kann mit einem $sum Operator kombiniert werden. Dadurch kann "$multiply": [ "$price", "$sold" ] implementiert werden. Der $out Operator speichert die Ergebnisse in einer neuen Collection ab. Verwenden Sie diesen als letztes in der Pipeline. ','SELECT * FROM CountGains;','pipeline = [
     {"$addFields": {"price" : {"$trim": {"input": "$price", "chars": "€"}}}},
     {"$addFields": {"price" : {"$convert": {"input": "$price", "to": "double"}}}},
     {"$group": {"_id": None, "count": { "$sum": { "$multiply": [ "$price", "$sold" ] } }}},
@@ -261,7 +275,7 @@ CREATE TABLE IF NOT EXISTS "CountCity" (
 	"_id" TEXT NOT NULL UNIQUE,
 	"count" TEXT NOT NULL
 );
-INSERT INTO "TaskReview" VALUES (602,'DFP','Um das Zählen eines Wertes durchzuführen kann eine Gruppierung in Kombination mit dem gezählten Feld und einem neu angelegten Feld erstellt werden. Dies kann Beispielsweise so aussehen: {"_id": "$count_field","count": { "$sum": 1 }','SELECT * FROM CountCity;','Irgendeine Lösung');
+INSERT INTO "TaskReview" VALUES (602,'DFP','Um das Zählen eines Wertes durchzuführen, kann eine Gruppierung in Kombination mit dem gezählten Feld und einem neu angelegten Feld erstellt werden. Dies kann Beispielsweise so aussehen: {"_id": "$count_field","count": { "$sum": 1 }. Die Punktnotation sollte hier beim erfassen des Feldes nicht vergessen werden.','SELECT * FROM CountCity;','Irgendeine Lösung');
 INSERT INTO "CountCity" VALUES ('Stockholm','3');
 
 DROP TABLE IF EXISTS "MoreThan25";
@@ -269,7 +283,7 @@ CREATE TABLE IF NOT EXISTS "MoreThan25" (
 	"_id" TEXT NOT NULL UNIQUE,
 	"count" TEXT NOT NULL
 );
-INSERT INTO "TaskReview" VALUES (604,'DFP','Um die gekauften Produkte zählen zu können muss in jedem Dokument der Array $cart aufgelöst werden um an die einzelnen Id zu gelangen. Danach kann eine Gruppierung mit einem Feld für das Zählen festgelegt werden und auf diesem Feld der $gt Operator angewendet werden.','SELECT * FROM MoreThan25;','Irgendeine Lösung');
+INSERT INTO "TaskReview" VALUES (604,'DFP','Um die gekauften Produkte zählen zu können muss in jedem Dokument der Array $cart aufgelöst werden ("$unwind":"$array") um an die einzelnen Ids zu gelangen. Danach kann eine Gruppierung mit einem Feld für das Zählen festgelegt werden und auf diesem Feld der $gt Operator angewendet werden.','SELECT * FROM MoreThan25;','Irgendeine Lösung');
 INSERT INTO "MoreThan25" VALUES ('None','41');
 
 DROP TABLE IF EXISTS "GridFSchecksum";
@@ -287,12 +301,11 @@ CREATE TABLE IF NOT EXISTS "MapReduce" (
 	"_id" TEXT NOT NULL UNIQUE,
 	"value" TEXT NOT NULL
 );
-INSERT INTO "MapReduce" VALUES ('Longquan','2.0');
-INSERT INTO "MapReduce" VALUES ('Shuiyang','2.0');
-INSERT INTO "TaskReview" VALUES (701,'DFP','Hier müssen zuerst in einer Map "this.address.city" mit dem value 1 gemapt werden. Danach können die Values wie aus dem Beispiel addiert werden.','SELECT * FROM MapReduce;',
+INSERT INTO "MapReduce" VALUES ('Apples - Spartan','75.0');
+INSERT INTO "TaskReview" VALUES (701,'DFP','Hier müssen zuerst in einer Map der Produktname und die Anzahl der verkauften Äpfel erfasst werden. Danach können die Values wie aus dem Beispiel weiter oben addiert werden.','SELECT * FROM MapReduce;',
                                  'new_mapper = Code("""function () {
-             if(this.address.country == "China"){
-                 emit(this.address.city,1)
+             if(this.product.includes("Apples - Spartan") ){
+                 emit(this.product,this.sold)
              }
             }""")
 
@@ -461,31 +474,148 @@ CREATE TABLE IF NOT EXISTS "Maria_products" (
 	"credit_card"	TEXT NOT NULL,
 	"customer"	TEXT NOT NULL,
 	"payed"	TEXT NOT NULL,
-	"purchased"	TEXT NOT NULL,
-	"timestamp"	TEXT NOT NULL
+	"purchased"	TEXT NOT NULL
 );
 INSERT INTO "Maria_products" VALUES ('TSE-184-4cB-FcF45-ACE',
                                        'MU90 CVRW 4031 7723 2292 9086 263O YZ',
-                                       '29.18',
+                                       '30.45',
                                        'None',
-                                       '5fe60bb5fc13ae64ea000373',
+                                       '600c7584096cd4ef6296c6cf',
                                        'False',
-                                       '[ObjectId(''5fe6fc8ba789e6e217ef8ac5''), ObjectId(''5fe6fc8ba789e6e217ef89df'')]',
-                                       '2020-12-15 06:11:35');
+                                       '[ObjectId(''5fe6fc8ba789e6e217ef8715''), ObjectId(''5fe6fc8ba789e6e217ef8716'')]');
 INSERT INTO "TaskReview" VALUES (906,'DFP','Erstellen Sie ein neues Dokument welches alle Informationen enthält. Die Ids für die Produkte können Sie aus den vorherigen Aufgaben entnehmen. Den Preis können Sie selbst zusammenrechnen und manuell als Integer einfügen.','SELECT * FROM Maria_products;',
-                                 'new_doc = {
+                                 'trans_col = store_db["Transaction"]
+
+new_doc = {
  ''IBAN'': ''MU90 CVRW 4031 7723 2292 9086 263O YZ'',
  ''_id'': ''TSE-184-4cB-FcF45-ACE'',
- ''costs'': 29.18,
+ ''costs'': 30.45,
  ''credit_card'': None,
- ''customer'': ObjectId(''5fe60bb5fc13ae64ea000373''),
+ ''customer'': ObjectId(''600c7584096cd4ef6296c6cf''),
  ''payed'': False,
- ''purchased'': [ObjectId(''5fe6fc8ba789e6e217ef8ac5''),
-               ObjectId(''5fe6fc8ba789e6e217ef89df'')],
- ''timestamp'': datetime.datetime(2020, 12, 15, 6, 11, 35)}
+ ''purchased'': [ObjectId(''5fe6fc8ba789e6e217ef8715''),
+               ObjectId(''5fe6fc8ba789e6e217ef8716'')]
+}
 
 trans_col.insert_one(new_doc)
 ');
 
+DROP TABLE IF EXISTS "Customer_products";
+CREATE TABLE IF NOT EXISTS "Customer_products" (
+	"_id" TEXT NOT NULL UNIQUE,
+	"IBAN" TEXT NOT NULL,
+	"costs"	TEXT,
+	"credit_card"	TEXT NOT NULL,
+	"customer"	TEXT NOT NULL,
+	"payed"	TEXT NOT NULL,
+	"purchased"	TEXT NOT NULL
+);
+
+INSERT INTO "Customer_products" VALUES ('TSX-994-4cB-AcA3C-FF3',
+                                       'DA55 HJGZ 4032 8921 3391 9090 0000 A3',
+                                       '10.02',
+                                       '4152 9912 3456 7890',
+                                       '5fe60bb5fc13ae64ea000373',
+                                       'False',
+                                       '[ObjectId(''5fe6fc8ba789e6e217ef872f''), ObjectId(''5fe6fc8ba789e6e217ef872f'')]');
+
+INSERT INTO "TaskReview" VALUES (907,'DFP','Erstellen Sie ein neues Dokument welches alle Informationen enthält. Die Ids für die Produkte können Sie aus den vorherigen Aufgaben entnehmen. Den Preis können Sie selbst zusammenrechnen und manuell als Integer einfügen.','SELECT * FROM Customer_products;',
+                                 'new_doc = {
+ ''IBAN'': ''DA55 HJGZ 4032 8921 3391 9090 0000 A3'',
+ ''_id'': ''TSX-994-4cB-AcA3C-FF3'',
+ ''costs'': 10.02,
+ ''credit_card'': ''4152 9912 3456 7890'',
+ ''customer'': ObjectId(''5fe60bb5fc13ae64ea000373''),
+ ''payed'': False,
+ ''purchased'': [ObjectId(''5fe6fc8ba789e6e217ef872f''),
+               ObjectId(''5fe6fc8ba789e6e217ef872f'')]}
+
+trans_col.insert_one(new_doc)
+');
+
+DROP TABLE IF EXISTS "repair_price";
+CREATE TABLE IF NOT EXISTS "repair_price" (
+	"_id" TEXT NOT NULL UNIQUE,
+	"customer" TEXT NOT NULL,
+	"IBAN"	TEXT,
+	"credit_card"	TEXT NOT NULL,
+	"timestamp"	TEXT NOT NULL,
+	"costs"	TEXT NOT NULL,
+	"payed"	TEXT NOT NULL,
+	"purchased" TEXT NOT NULL
+);
+
+INSERT INTO "repair_price" VALUES ('T1yD-652-hJE-Pd2-048-PxH',
+                                       '5fe60bb3fc13ae64ea00019c',
+                                       'FR44 3837 6152 04NJ 7YRF BM10 G81',
+                                       'None',
+                                       '2021-01-11 15:58:17',
+                                       '21.740000000000002',
+                                       'False',
+                                       '[ObjectId(''5fe6fc8ba789e6e217ef88ca''), ObjectId(''5fe6fc8ba789e6e217ef8aa3'')]');
+
+INSERT INTO "repair_price" VALUES ('T1zZ-795-n9S-JEO-345-kW4',
+                                       '5fe60bb2fc13ae64ea00011e',
+                                       'IL18 7904 9139 6994 9109 888',
+                                       '3577551451026503',
+                                       '2020-08-17 22:12:14',
+                                       '7.39',
+                                       'True',
+                                       '[ObjectId(''5fe6fc8ba789e6e217ef880b'')]');
+
+INSERT INTO "repair_price" VALUES ('T3U6-324-gxl-1og-332-p1t',
+                                       '5fe60bb4fc13ae64ea00028b',
+                                       'PL61 8573 5428 1226 4325 7713 5135',
+                                       'None',
+                                       '2021-01-15 13:06:16',
+                                       '46.0',
+                                       'True',
+                                       '[ObjectId(''5fe6fc8ba789e6e217ef89ff''), ObjectId(''5fe6fc8ba789e6e217ef8781''), ObjectId(''5fe6fc8ba789e6e217ef8a5f''), ObjectId(''5fe6fc8ba789e6e217ef89a0'')]');
+
+INSERT INTO "TaskReview" VALUES (908,'DFP',' Sie können die Anfrage für die Überprüfung mit dem $in Operator durchführen. Den Preis für alle Transaktionen zu berechnen können Sie mit der Aggregation Pipeline oder der Python Syntax durchführen. Sie brauchen dazu die Grocery, Customer und Transaction Collection.','SELECT * FROM repair_price;',
+                                 'customer_col = store_db["Customer"]
+result = customer_col.find()
+
+list_of_products = []
+for doc in result:
+    query = doc["_id"]
+    print(query)
+    list_of_products = doc["cart"].copy()
+
+    grocery_col = store_db["Grocery"]
+    cursor = grocery_col.find({"_id":{"$in":list_of_products}})
+
+    total = 0
+    for doc in cursor:
+        new_doc = doc["price"].replace("€","")
+        print(new_doc)
+        total += float(new_doc)
+
+    print(total)
+    trans_col = store_db["Transaction"]
+    trans_col.update_one({"customer":ObjectId(query)},{"$set":{"costs":total}})
+' ||
+                                 '' ||
+                                 '' ||
+                                 '
+transaction_col = store_db["Transaction"]
+grocery_col = store_db["Grocery"]
+pipeline = [
+    {"$lookup": { "from":"Grocery", "localField":"purchased", "foreignField":"_id","as": "customer_cart"}},
+    {"$unwind": "$customer_cart"},
+    {"$addFields": {"trim_price" : {"$trim": {"input": "$customer_cart.price", "chars": "€"}}}},
+    {"$addFields": {"double_price" : {"$convert": {"input": "$trim_price", "to": "double"}}}},
+    {"$group": {"_id": "$_id", "new_price": {"$sum": "$double_price"}}},
+    {"$match" : {"_id":"T0Bd-255-N4U-8n5-534-skj"}}
+]
+for doc in transaction_col.aggregate(pipeline):
+    pprint(doc)' ||
+                                 '' ||
+                                 '' ||
+                                 '' ||
+                                 '
+df = pd.DataFrame(trans_col.find({"_id": {"$in":["T1yD-652-hJE-Pd2-048-PxH","T1zZ-795-n9S-JEO-345-kW4","T3U6-324-gxl-1og-332-p1t"]}}))
+
+');
 
 COMMIT;
