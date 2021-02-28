@@ -218,9 +218,10 @@ df = pd.DataFrame(result)
 df = df.astype(str)
 mongo_lm.show_task(502,df)');
 
+
+INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef870c','Energy Drink','€10.52','True','75','25');
+INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef870f','Pastry - Plain Baked Croissant','€4.39','True','95','76');
 INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef8710','Scallops - U - 10','€18.70','True','72','46');
-INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef8712','Beer - Camerons Cream Ale','€20.19','True','25','60');
-INSERT INTO "StockExists" VALUES ('5fe6fc8ba789e6e217ef871b','Blouse / Shirt / Sweater','€2.92','True','68','83');
 
 DROP TABLE IF EXISTS "VorratProdukt";
 CREATE TABLE IF NOT EXISTS "VorratProdukt" (
