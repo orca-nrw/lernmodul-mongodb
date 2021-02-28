@@ -536,41 +536,17 @@ trans_col.insert_one(new_doc)
 DROP TABLE IF EXISTS "repair_price";
 CREATE TABLE IF NOT EXISTS "repair_price" (
 	"_id" TEXT NOT NULL UNIQUE,
-	"customer" TEXT NOT NULL,
-	"IBAN"	TEXT,
-	"credit_card"	TEXT NOT NULL,
-	"timestamp"	TEXT NOT NULL,
-	"costs"	TEXT NOT NULL,
-	"payed"	TEXT NOT NULL,
-	"purchased" TEXT NOT NULL
+	"costs"	TEXT NOT NULL
 );
 
 INSERT INTO "repair_price" VALUES ('T1yD-652-hJE-Pd2-048-PxH',
-                                       '5fe60bb3fc13ae64ea00019c',
-                                       'FR44 3837 6152 04NJ 7YRF BM10 G81',
-                                       'None',
-                                       '2021-01-11 15:58:17',
-                                       '21.740000000000002',
-                                       'False',
-                                       '[ObjectId(''5fe6fc8ba789e6e217ef88ca''), ObjectId(''5fe6fc8ba789e6e217ef8aa3'')]');
+                                       '21.740000000000002');
 
 INSERT INTO "repair_price" VALUES ('T1zZ-795-n9S-JEO-345-kW4',
-                                       '5fe60bb2fc13ae64ea00011e',
-                                       'IL18 7904 9139 6994 9109 888',
-                                       '3577551451026503',
-                                       '2020-08-17 22:12:14',
-                                       '7.39',
-                                       'True',
-                                       '[ObjectId(''5fe6fc8ba789e6e217ef880b'')]');
+                                   '7.39');
 
 INSERT INTO "repair_price" VALUES ('T3U6-324-gxl-1og-332-p1t',
-                                       '5fe60bb4fc13ae64ea00028b',
-                                       'PL61 8573 5428 1226 4325 7713 5135',
-                                       'None',
-                                       '2021-01-15 13:06:16',
-                                       '46.0',
-                                       'True',
-                                       '[ObjectId(''5fe6fc8ba789e6e217ef89ff''), ObjectId(''5fe6fc8ba789e6e217ef8781''), ObjectId(''5fe6fc8ba789e6e217ef8a5f''), ObjectId(''5fe6fc8ba789e6e217ef89a0'')]');
+                                       '46.0');
 
 INSERT INTO "TaskReview" VALUES (908,'DFP',' Sie können die Anfrage für die Überprüfung mit dem $in Operator durchführen. Den Preis für alle Transaktionen zu berechnen können Sie mit der Aggregation Pipeline oder der Python Syntax durchführen. Sie brauchen dazu die Grocery, Customer und Transaction Collection.','SELECT * FROM repair_price;',
                                  'customer_col = store_db["Customer"]
@@ -606,10 +582,9 @@ pipeline = [
     {"$addFields": {"trim_price" : {"$trim": {"input": "$customer_cart.price", "chars": "€"}}}},
     {"$addFields": {"double_price" : {"$convert": {"input": "$trim_price", "to": "double"}}}},
     {"$group": {"_id": "$_id", "new_price": {"$sum": "$double_price"}}},
-    {"$match" : {"_id":"T0Bd-255-N4U-8n5-534-skj"}}
+    {"$out":"my_costs"}
 ]
-for doc in transaction_col.aggregate(pipeline):
-    pprint(doc)' ||
+transaction_col.aggregate(pipeline)' ||
                                  '' ||
                                  '' ||
                                  '' ||
