@@ -8,10 +8,15 @@ CREATE TABLE IF NOT EXISTS "TaskReview" (
 	"additionalInformation"	TEXT NOT NULL
 );
 INSERT INTO "TaskReview" VALUES (21,'SC','Schau nochmal unter Punkt 2.1 nach.','5',json('{"1": "Number", "2": "Int", "3":  "Varchar", "4":  "String", "5":  "ObjectId", "6":  "ID"}'));
-INSERT INTO "TaskReview" VALUES (22,'SC','Schau nochmal unter Punkt 2 nach.','2',json('{"1": "In einer Textdatei,In einer Tabelle mit Spalten und Zeilen", "2": "In Dokumenten mit Key/Value Paaren"}'));
+INSERT INTO "TaskReview" VALUES (22,'SC','Schau nochmal unter Punkt 2 nach.','2',json('{"1": "In einer Tabelle mit Spalten und Zeilen", "2": "In Dokumenten mit Key/Value Paaren"}'));
 INSERT INTO "TaskReview" VALUES (23,'SC','Schau nochmal unter Punkt 2.1 nach.','2',json('{"1": "JSON", "2": "BSON", "3":  "CSV", "4":  "XML", "5":  "DType"}'));
 INSERT INTO "TaskReview" VALUES (24,'SC','Embedded Document sind Dokumente welche als Objekt innerhalb eines anderen Dokumentes abgespeichert werden.','1',
                                  json('{"1": "{info:{price:123}}", "2": "{info:[price:123]}", "3": "{info:123}"}'));
+
+INSERT INTO "TaskReview" VALUES (25,'SC','Embedded Document sind Dokumente welche als Objekt innerhalb eines anderen Dokumentes abgespeichert werden.','2',
+                                 json('{"1": "{info:{price:123}}", "2": "{info:[price:123]}", "3": "{info:123}"}'));
+
+INSERT INTO "TaskReview" VALUES (26,'MC','Schau nochmal unter Punkt 2.1 nach.',json_array('2', '3','5','7'),json('{"1": "Number", "2": "ObjectID", "3": "Date", "4":  "Array", "5":  "Object", "6":  "Boolean", "7":  "Binary Data", "8":  "String"}'));
 
 INSERT INTO "TaskReview" VALUES (31,'SC','Siehe nochmal bei "Ein Dokument anlegen und in der Collection abspeichern" eines neuen Dokumentes nach.','3',
                                 json('{"1": "Sofern kein eigener Primärschlüssel definiert wird muss die ObjectId immer angegeben werden",' ||
@@ -26,6 +31,11 @@ INSERT INTO "TaskReview" VALUES (33,'SC','','3',
                                 json('{"1": "In der Collection customer wurde noch keine Struktur implementiert",' ||
                                      ' "2": "Die MongoDB löscht eingefügte Dokumente die nicht der Struktur entsprechen",' ||
                                      ' "3": "Die MongoDB ist ein strukturlose Datenbank und kann somit in einer Collection unterschiedliche Dokumente enthalten"}'));
+
+INSERT INTO "TaskReview" VALUES (34,'SC','','3',
+                                json('{"1": "Dies sind Python-Methoden und die Syntax ist collection.sort()",' ||
+                                     ' "2": "Dies sind Collection-Methoden und die Syntax ist collection.sort().find()",' ||
+                                     ' "3": "Dies sind MongoCursor-Methoden und die Syntax ist collection.find().sort()"}'));
 
 INSERT INTO "TaskReview" VALUES (41,'SC','','1',
                                 json('{"1": "Die BSON Datentypen werden als Objekte gespeichert",' ||
