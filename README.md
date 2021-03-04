@@ -11,12 +11,18 @@ Zu beachten ist, dass die MongoDB durch eine mongod.conf gestartet wird und im H
 das Notebook, den DB Ordner und die mongod.conf vorhanden sein müssen.
 Diese Implementierungen finden sich im Dockerfile wieder.
 
-## Datensatz
-'monogdata/customer.json'
-<br>
+## Datensätze
+```seh
+monogdata/customer.json
+```
+
+```sh
 monogdata/grocery.json'
-<br
-'monogdata/transaction.json'
+```
+
+```sh
+monogdata/transaction.json
+```
 
 Lektion mit MongoDB starten: 
 
