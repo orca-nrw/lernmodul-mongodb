@@ -16,7 +16,7 @@ INSERT INTO "TaskReview" VALUES (24,'SC','Embedded Document sind Dokumente welch
 INSERT INTO "TaskReview" VALUES (25,'SC','Embedded Document sind Dokumente welche als Objekt innerhalb eines anderen Dokumentes abgespeichert werden.','2',
                                  json('{"1": "{info:{price:123}}", "2": "{info:[price:123]}", "3": "{info:123}"}'));
 
-INSERT INTO "TaskReview" VALUES (26,'MC','Schau nochmal unter Punkt 2.1 nach.',json_array('2', '3','5','7'),json('{"1": "Number", "2": "ObjectID", "3": "Date", "4":  "Array", "5":  "Object", "6":  "Boolean", "7":  "Binary Data", "8":  "String"}'));
+INSERT INTO "TaskReview" VALUES (26,'MC','Schau nochmal unter Punkt 2.1 nach.',json_array('2', '3','7'),json('{"1": "Number", "2": "ObjectID", "3": "Date", "4":  "Array", "5":  "Object", "6":  "Boolean", "7":  "Binary Data", "8":  "String"}'));
 
 INSERT INTO "TaskReview" VALUES (31,'SC','Siehe nochmal bei "Ein Dokument anlegen und in der Collection abspeichern" eines neuen Dokumentes nach.','3',
                                 json('{"1": "Sofern kein eigener Primärschlüssel definiert wird muss die ObjectId immer angegeben werden",' ||
@@ -36,6 +36,17 @@ INSERT INTO "TaskReview" VALUES (34,'SC','','3',
                                 json('{"1": "Dies sind Python-Methoden und die Syntax ist collection.sort()",' ||
                                      ' "2": "Dies sind Collection-Methoden und die Syntax ist collection.sort().find()",' ||
                                      ' "3": "Dies sind MongoCursor-Methoden und die Syntax ist collection.find().sort()"}'));
+
+INSERT INTO "TaskReview" VALUES (40,'SC','','1',
+                                json('{"1": "6",' ||
+                                     ' "2": "5",' ||
+                                     ' "3": "7"}'));
+
+INSERT INTO "TaskReview" VALUES (48,'SC','','2',
+                                json('{"1": "Weil die Dokumente von Pandas nicht korrekt angezeigt werden. Felder mit NaN wurden nicht korrekt interpretiert.",' ||
+                                     ' "2": "Weil die Dokumente keine feste Struktur haben und unterschiedliche viele Felder und Datentypen besitzen können",' ||
+                                     ' "3": "Weil dies ein Fehler in der Datenbank ist und diese Dokumente nicht korrekt eingetragen wurden."}'));
+
 
 INSERT INTO "TaskReview" VALUES (41,'SC','','1',
                                 json('{"1": "Die BSON Datentypen werden als Objekte gespeichert",' ||
