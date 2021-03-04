@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS "User" (
 	"last_login"	TEXT NOT NULL,
 	"registration_date" TEXT
 );
-INSERT INTO "TaskReview" VALUES (301,'DFP','TIPP','SELECT * FROM User WHERE _id=''775'';','new_customer = {
+INSERT INTO "TaskReview" VALUES (301,'DFP','Füllen Sie die Felder wie bei dem Beispiel oben aus. Sie können ein Dokument auch mit delete_one({}) löschen. Als Lösung wird nur ein Dokument akzeptiert!','SELECT * FROM User WHERE _id=''775'';','new_customer = {
     "_id":775,
     "first_name" : "Manuel",
     "last_name" : "Mustermann",
