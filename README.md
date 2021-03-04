@@ -1,12 +1,12 @@
 # Lernmodul MongoDB
 
 ## Überblick
-Dieses Lernmodul bietet anhand von drei JSON Datensätzen einen grundlegenden Überblick über die Interatkion mit der dokumentenorientierten Datenbank MongoDB.
-Es wird zu beginn das theoretische Verständniss für Dokumente, Schlüssel/Wert Paare und die BSON Datentypen gegeben. 
-Im weiterern Verlauf werden Inhalte wie die MonogDB Operatoren, die Aggregation Pipeline oder das Filesystem GridFS behandelt.
-In jedem Kapitel finden sich Aufgabenbereiche wieder, in dennen das erlernte Wissen direkt angewendet werden soll.
+Dieses Lernmodul bietet anhand von drei JSON Datensätzen einen grundlegenden Überblick über die Interaktion mit der dokumentenorientierten Datenbank MongoDB.
+Es wird zu Beginn das theoretische Verständnis für Dokumente, Schlüssel/Wert Paare und die BSON Datentypen gegeben.
+Im weiteren Verlauf werden Inhalte wie die MonogDB Operatoren, die Aggregation Pipeline oder das Filesystem GridFS behandelt.
+In jedem Kapitel finden sich Aufgabenbereiche wieder, in denen das erlernte Wissen direkt angewendet werden soll.
 
-Das Notebook basiert auf einem Ubuntu 18.04 und einer MongoDB mit der Version 4.2. 
+Das Notebook basiert auf einem Ubuntu 18.04 und einer MongoDB mit der Version 4.2.
 Zu beachten ist, dass die MongoDB durch eine mongod.conf gestartet wird und im Home Verzeichnis die notwendigen Berechtigungen für
 das Notebook, den DB Ordner und die mongod.conf vorhanden sein müssen.
 Diese Implementierungen finden sich im Dockerfile wieder.
