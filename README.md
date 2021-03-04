@@ -38,7 +38,8 @@ docker build -t lernmodulmongo:1.0 .
 docker run -p 8888:8888 lernmodulmongo:1.0
 ```
 
-Klicken Sie dann auf den unteren Link der im Terminal angezeigt wird.
+Klicken Sie dann auf den unteren Link der im Terminal angezeigt wird. 
+Das Lernmodul wird sich dann in einem Browserfenster öffnen.
 ```
     To access the notebook, open this file in a browser:
         file:///home/hsd/.local/share/jupyter/runtime/nbserver-1-open.html
