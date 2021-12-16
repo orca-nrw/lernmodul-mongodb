@@ -7,7 +7,7 @@ Um das Lernmodul zu starten gibt es zwei Möglichkeiten, einmal das Starten via 
 | Schritt | Aktion |
 | ------ | ------ |
 | 1. | **Online Ausführen mit Binder** oder **Lokales Ausführen mit Docker** |
-| 2.  | **Die MongoDB Shell öffnen** |
+| 2.  | [**Die MongoDB Shell öffnen**](#die-mongodb-shell-öffnen) |
 
 ## Online Ausführen mit Binder
 
