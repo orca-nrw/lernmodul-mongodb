@@ -36,3 +36,8 @@ Das Lernmodul wird sich dann in einem Browserfenster öffnen.
 ```
 
 Eine umfassende Anleitung wie das Notebook gestartet und Docker installiert werden kann findet sich in dieser [Anleitung](https://projectbase.medien.hs-duesseldorf.de/eild.nrw/eild.nrw-mp/-/wikis/Technik/Jupyter-Notebook-lokal-mit-Docker-starten) 
+
+# Die MongoDB Shell öffnen
+
+![](jupyter_1.png)
+![](jupyter_2.png)
