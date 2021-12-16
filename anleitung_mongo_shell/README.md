@@ -2,6 +2,13 @@
 
 Diese Anleitung zeigt wie man im Lernmodul eine MongoDB-Shell öffnet.
 
+Um das Lernmodul zu starten gibt es zwei Möglichkeiten, einmal das Starten via Binder oder das lokale Starten mit docker. 
+
+| Schritt | Aktion |
+| ------ | ------ |
+| 1. | **Online Ausführen mit Binder** oder **Lokales Ausführen mit Docker** |
+| 2.  | **Die MongoDB Shell öffnen** |
+
 ## Online Ausführen mit Binder
 
 Folgenden Link Aufrufen und ca. 3 Minuten! warten. 
