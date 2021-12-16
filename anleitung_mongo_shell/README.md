@@ -48,5 +48,9 @@ Eine umfassende Anleitung wie das Notebook gestartet und Docker installiert werd
 
 # Die MongoDB Shell öffnen
 
+Nachdem man auf Jupyter Notebook im Browser zugreifen kann, lässt sich direkt eine (Linux-)Shell öffnen:
 ![](jupyter_1.png)
+
+Nachdem sich die Shell geöffnet hat, muss man einen Befehl zum starten des MongoDB-Servers eingeben `mongod --config /home/jovyan/mongod.conf` und danach kann man sich mit der MongoDB Verbinden (mit `mongo`). Nun kann man die MongoDB benutzen (z:B. `db.emp.insert({name:"Joe"});`). 
+
 ![](jupyter_2.png)
