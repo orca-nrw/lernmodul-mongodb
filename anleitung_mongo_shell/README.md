@@ -21,7 +21,7 @@ Hinweis: Sollte das Laden der Seite 5 Minuten überschreiten, einfach den Link n
 ## Lokales Ausführen mit Docker
 
 ```sh
-docker clone https://projectbase.medien.hs-duesseldorf.de/eild.nrw-module/lernmodul-mongodb.git
+git clone https://projectbase.medien.hs-duesseldorf.de/eild.nrw-module/lernmodul-mongodb.git
 ```
 
 ```sh
