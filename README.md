@@ -1,3 +1,5 @@
+![EILD.nrw](https://github.com/orca-nrw/plsql-trainer/raw/main/app/src/img/Logo-mitSchrift-v2.png)
+
 # Lernmodul MongoDB
 
 Lektion mit MongoDB starten: 
